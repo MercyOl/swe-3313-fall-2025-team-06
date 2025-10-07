@@ -17,7 +17,7 @@ _Graduation: May 2027_
 ## Skills
 **Languages:** Python, Java, C++, Kotlin, Jira, Asana, Confluence, TensorFlow, PyTorch
 
-**Tools:** GitHub, Jira, Asana, Confluence
+**Tools:** GitHub, Jira, Asana, Confluence, Figma
 
 **Frameworks:** Flask, TensorFlow, PyTorch
 
