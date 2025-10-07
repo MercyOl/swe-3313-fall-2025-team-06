@@ -16,8 +16,8 @@ _Graduation: [expected graduation]_
 ---
 
 ## Skills
-**Technical:** [insert technical skills]  
-**Soft Skills:** [insert soft skills]  
+**Languages:** [insert Programming Languages]  
+**Tools:** [insert tools i.e adobe illustrator]  
 
 ---
 
