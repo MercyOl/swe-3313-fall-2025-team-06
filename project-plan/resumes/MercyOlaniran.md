@@ -1,7 +1,7 @@
 # Mercy Olaniran
 
 Marietta, GA 30060  
-[molanira@students.kennesaw.edu](mailto:molanira@students.kennesaw.edu) |  [LinkedIn](https://www.linkedin.com/in/mercyolaniran)
+[molanira@students.kennesaw.edu](mailto:molanira@students.kennesaw.edu) | [Linkedin](https://www.linkedin.com/in/mercy-olaniran-474081264/)
 
 ---
 
@@ -15,8 +15,11 @@ _Graduation: May 2027_
 ---
 
 ## Skills
-**Technical:** MS Excel, PowerPoint, Jira, Asana, Java, Python, Kotlin, Confluence, GitHub, Microsoft Suite, TensorFlow, PyTorch, Machine Learning, UI/UX Prototyping  
-**Soft Skills:** Market & Data Analysis, Requirements Gathering, Product Design, Business Problem Analysis, Statement of Need (SON) Development, RFP Management, Stakeholder Engagement, Project Coordination, Communication & Public Speaking, Research & Analytical Thinking
+**Languages:** Python, Java, C++, Kotlin, Jira, Asana, Confluence, TensorFlow, PyTorch
+
+**Tools:** GitHub, Jira, Asana, Confluence
+
+**Frameworks:** Flask, TensorFlow, PyTorch
 
 ---
 
@@ -28,13 +31,6 @@ _June 2025 – Present_
 - Assisted with RFP development and vendor evaluation by coordinating with procurement and reviewing proposals.  
 - Evaluated emerging AI tools for ethics, goals, and security standards, providing recommendations for prototype selection.  
 - Facilitated stakeholder alignment by creating presentations, workshops, and demos to communicate product vision and progress.
-
-
-### Marketing Assistant, _Kennesaw State University_  
-_June 2025 – Present_  
-- Planned and executed outreach strategies to promote programs and events.  
-- Developed content and communications to drive student engagement.  
-- Designed physical marketing content
 
 
 ### Chief Marketing Officer, _Aerial Robotics Competition Team_  
