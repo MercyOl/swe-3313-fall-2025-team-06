@@ -15,8 +15,7 @@ _Graduation: 2028_
 ---
 
 ## Skills
-**Technical:** Adobe Illustrator, Google Products, Microsoft Powerpoint, Microsoft Word, Autodesk Sketchbook Mobile  
-**Soft Skills:** Hard worker, quick learner, problem solver  
+**Tools:** Adobe Illustrator, Google Products, Autodesk Sketchbook Mobile   
 
 ---
 
@@ -41,7 +40,7 @@ _September 2024 – September 2024_
 _July 2025 – Present_  
 - Team communication and planning
 - UEFN implemented simple 3D modelling
-- 2D UI design and simple set up
+- 2D UI design and simple setup
 
 
 ---
