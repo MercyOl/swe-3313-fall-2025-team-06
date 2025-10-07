@@ -17,6 +17,6 @@ Welcome to the project repository for Team 06 – Schmendrick's Fools. Our team 
 - Click [here](project-plan/technology-selection/README.md) for a detailed explanation of what technologies and tools we are using and why.
 
 ## Gantt Chart
-[Here](project-plan/README.md) we have our Gantt chart, which outlines our project timeline and helps us allocate time effectively to build the application.
+[Here](project-plan/README.md) we have information about our Gantt chart, which outlines our project timeline and helps us allocate time effectively to build the application.
 
 ## Project Plan Presentation 
