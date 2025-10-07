@@ -5,7 +5,7 @@ We selected **Java 23** as the primary programming language.
 - It provides long-term stability, performance, and an extensive ecosystem of libraries.  
 - Everyone in our group is at least proficient in Java.
 
-## Framwork
+## Framework
 We will be using **Spring** as our framework, as it is the industry standard for pairing with Java and helps to streamline the development process.  
 - It is widely used and well-supported in the Java ecosystem  
 - It works seamlessly with Maven and modern Java versions 
