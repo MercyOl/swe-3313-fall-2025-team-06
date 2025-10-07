@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?><project name="SWE gantt" company="" webLink="http://" view-date="2025-09-23" view-index="0" gantt-divider-location="625" resource-divider-location="131" version="3.3.3316" locale="en_US">
+<?xml version="1.0" encoding="UTF-8"?><project name="SWE gantt" company="" webLink="http://" view-date="2025-09-23" view-index="0" gantt-divider-location="610" resource-divider-location="131" version="3.3.3316" locale="en_US">
     <description/>
     <view zooming-state="default:3" id="gantt-chart">
-        <field id="tpd3" name="Name" width="322" order="0"/>
-        <field id="tpd4" name="Begin date" width="122" order="1"/>
-        <field id="tpd5" name="End date" width="122" order="2"/>
+        <field id="tpd3" name="Name" width="314" order="0"/>
+        <field id="tpd4" name="Begin date" width="119" order="1"/>
+        <field id="tpd5" name="End date" width="119" order="2"/>
         <field id="tpd15" name="Notes" width="20" order="3"/>
-        <field id="tpd6" name="Duration" width="43" order="3"/>
+        <field id="tpd6" name="Duration" width="42" order="3"/>
         <option id="filter.completedTasks" value="false"/>
         <option id="filter.dueTodayTasks" value="false"/>
         <option id="filter.overdueTasks" value="false"/>
@@ -82,8 +82,8 @@
                     <depend id="30" type="2" difference="0" hardness="Strong"/>
                 </task>
             </task>
-            <task id="28" uid="cefe865ec93d48f08b940952d60635f9" name="Create README.md" meeting="false" start="2025-10-04" duration="4" complete="0" expand="true">
-                <task id="29" uid="f659006f2e3142a9872c1d4fb89d1c95" name="Add introduction" meeting="false" start="2025-10-04" duration="3" complete="0" expand="true"/>
+            <task id="28" uid="cefe865ec93d48f08b940952d60635f9" name="Create README.md" meeting="false" start="2025-10-06" duration="4" complete="0" expand="true">
+                <task id="29" uid="f659006f2e3142a9872c1d4fb89d1c95" name="Add introduction" meeting="false" start="2025-10-06" duration="3" complete="0" expand="true"/>
                 <task id="30" uid="0fc55807f2e24f5280fa53769118ac6a" name="Add relative links of each section" meeting="false" start="2025-10-09" duration="1" complete="0" expand="true"/>
             </task>
             <task id="11" uid="c29e55c3949a4538941d0ed8adee2254" name="Produce Loom Video" meeting="false" start="2025-10-06" duration="2" complete="0" expand="true">
@@ -125,8 +125,8 @@
                     <depend id="49" type="2" difference="0" hardness="Strong"/>
                 </task>
             </task>
-            <task id="45" uid="1a4d1ad33af74183a10198de890c8cfa" name="Requirements Presentation" meeting="false" start="2025-10-11" duration="8" complete="0" expand="true">
-                <task id="46" uid="162a64999e8241158786a9808206a68e" name="Draft video script" meeting="false" start="2025-10-11" duration="4" complete="0" expand="true">
+            <task id="45" uid="1a4d1ad33af74183a10198de890c8cfa" name="Requirements Presentation" meeting="false" start="2025-10-13" duration="8" complete="0" expand="true">
+                <task id="46" uid="162a64999e8241158786a9808206a68e" name="Draft video script" meeting="false" start="2025-10-13" duration="4" complete="0" expand="true">
                     <depend id="47" type="2" difference="0" hardness="Strong"/>
                 </task>
                 <task id="47" uid="11f08d2ac0cb4cfc8dc1e582d518d0c2" name="record and upload presentation" meeting="false" start="2025-10-22" duration="1" complete="0" expand="true"/>
