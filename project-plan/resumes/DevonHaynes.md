@@ -15,8 +15,10 @@ _Graduation: May 2028_
 ---
 
 ## Skills
-**Technical:** Java, C#, Verse, Unity, UEFN, Google Workspace, Adobe Illustrator, Adobe Photoshop, Cyberlink Powerdirector
-**Soft Skills:** Logical Problem Solving, Product Design, Effective Communication
+**Languages:** Java, C#, Verse
+
+**Tools:**  Unity, UEFN, Google Workspace, Adobe Illustrator, Adobe Photoshop, Cyberlink Powerdirector
+
 
 ---
 
