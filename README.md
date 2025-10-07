@@ -14,7 +14,7 @@ Welcome to the project repository for Team 06 – Schmendrick's Fools. Our team 
 ## Technology Selection
 - To build our application, we will be coding in Java through Spring. We will use a JSON database to store user and item attributes.
 
-- Click [here](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/project-plan/technology-selection/README.md) for a detailed explanation of what technologies and tools we are using and why.
+- Click [here](project-plan/technology-selection/README.md) for a detailed explanation of what technologies and tools we are using and why.
 
 ## Gantt Chart
 
