@@ -1,7 +1,7 @@
 # Tiffany Field
 
 Marietta, GA 30060  
-(tfield@students.kennesaw.edu) |  [LinkedIn](https://www.linkedin.com/in/tiffany-field-a94623347/)
+tfield@students.kennesaw.edu |  [LinkedIn](https://www.linkedin.com/in/tiffany-field-a94623347/)
 
 ---
 
