@@ -10,7 +10,9 @@ Welcome to the project repository for Team 06 – Schmendrick's Fools. Our team 
 - [Tiffany Field](project-plan/resumes/TiffanyField.md)
 
 ## Team Assignments
+- To ensure the project is running efficiently, we have assigned our team to five different roles: Project Leader, UI Specialist, Documentation Specialist, Backend Developer, and Tester
 
+- For a detailed explanation of what the responsibilies of each role, click [here](project-plan/team-assignments/README.md)
 ## Technology Selection
 - To build our application, we will be coding in Java through Spring. We will use a JSON database to store user and item attributes.
 
