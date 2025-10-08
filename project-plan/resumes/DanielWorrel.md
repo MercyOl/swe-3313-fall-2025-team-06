@@ -2,69 +2,34 @@
 # Daniel Worrel
 
 Marietta, GA 30060  
-[Insert email here ](mailto:insert email here) |  [LinkedIn](Put Linkedin or delete this part)
+dworrel@students.kennesaw.edu
 
 ---
 
 ## Education
 **Kennesaw State University** — Marietta, GA  
-**[Insert major]** | GPA: [insert GPA]  
-_Graduation: [expected graduation]_
+**Computer Game Design and Development** | GPA: 2.6
+_Graduation: 2027_
 
-**Relevant Coursework:** [insert relevant coursework]
+**Relevant Coursework:** Programming Problem Solving II, Program Problem Solving II Lab, Discrete Struct Comp, and Intro to Software Engineering
 
 ---
 
 ## Skills
-**Languages:** [insert Programming Languages]  
-**Tools:** [insert tools i.e adobe illustrator]  
-
----
-
-## Work Experience
-
-### [Insert job title], _[insert company name])_  
-_Month XXXX – Month XXXX_  
-- Bullet 1
-- Bullet 2
-- Bullet 3
-- Bullet 4 
-
-
-### [Insert job title], _[insert company name])_  
-_Month XXXX – Month XXXX_  
-- Bullet 1
-- Bullet 2
-- Bullet 3
-- Bullet 4 
+**Languages:** Python, Java, C#, and C++.
+**Tools:** Unity, Onshape, GitHub, Visual Studio Code, JetBrains PyCharm, JetBrians IntelliJ, DaVinci Resolve, ZBrush, Blender, Unreal Engine, and Obsidian.
 
 ---
 ## Projects
 
-### [insert project title]  
-_Month xxxx – Month xxxx_  
-- Bullet 1
-- Bullet 2
-- Bullet 3
-- Bullet 4
+### We Are The Fish  
+_October 2024 – November 2024_  
+- Lead Development
+- Input Management
+- Level Design and Programming
 
-### [insert project title]  
-_Month xxxx – Month xxxx_  
-- Bullet 1
-- Bullet 2
-- Bullet 3
-- Bullet 4 
-
-
----
-
-## Organizations
-- Organization 1
-- Organization 2
-- Organization 3
-
----
-
-## Awards
-- Award 1
-- Award 2 
+### UC-130 Some Kind of Tundra Escape
+_March 2025 – April 2025_  
+- Enemy AI
+- Trap Handling
+- Endgame Handling
