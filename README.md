@@ -10,9 +10,9 @@ Welcome to the project repository for Team 06 – Schmendrick's Fools. Our team 
 - [Tiffany Field](project-plan/resumes/TiffanyField.md)
 
 ## Team Assignments
-- To ensure the project is running efficiently, we have assigned our team to five different roles: Project Leader, UI Specialist, Documentation Specialist, Backend Developer, and Tester
+- To ensure the project is running efficiently, we have assigned our team to five different roles: Project Leader, UI Specialist, Documentation Specialist, Backend Developer, and Tester.
 
-- For a detailed explanation of what the responsibilies of each role, click [here](project-plan/team-assignments/README.md)
+- For a detailed explanation of what the responsibilies of each role, click [here](project-plan/team-assignments/README.md).
 ## Technology Selection
 - To build our application, we will be coding in Java through Spring. We will use a JSON database to store user and item attributes.
 
@@ -22,4 +22,4 @@ Welcome to the project repository for Team 06 – Schmendrick's Fools. Our team 
 - [Here](project-plan/README.md) we have information about our Gantt chart, which outlines our project timeline and helps us allocate time effectively to build the application.
 
 ## Project Plan Presentation 
-- The video presentation of our project plan can be found [here](https://www.loom.com/share/7142791640534e538a6149a22727e63b?sid=3d86df32-d01c-465d-b08b-35380c3de78b)
+- The video presentation of our project plan can be found [here](https://www.loom.com/share/7142791640534e538a6149a22727e63b?sid=3d86df32-d01c-465d-b08b-35380c3de78b).
