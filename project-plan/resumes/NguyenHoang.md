@@ -39,6 +39,8 @@ nhoang3\@students.kennesaw.edu \| [LinkedIn](https://www.linkedin.com/in/nguyenh
 - Analyze customer feedback data to identify areas for improvement within the store's services
 - Meet with customers to offer assistance with selecting merchandise, finding accessories, and completing purchases.
 
+------------------------------------------------------------------------
+
 ## Organizations
 
 -   Aerial Robotics Competition Team
