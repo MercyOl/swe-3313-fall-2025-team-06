@@ -22,3 +22,4 @@ Welcome to the project repository for Team 06 – Schmendrick's Fools. Our team 
 - [Here](project-plan/README.md) we have information about our Gantt chart, which outlines our project timeline and helps us allocate time effectively to build the application.
 
 ## Project Plan Presentation 
+- The video presentation of our project plan can be found [here](https://www.loom.com/share/7142791640534e538a6149a22727e63b?sid=3d86df32-d01c-465d-b08b-35380c3de78b)
