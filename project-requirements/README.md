@@ -1,4 +1,5 @@
-# **Version #1 — Must Have**
+# **Written Requirements**
+## **Version #1 — Must Have**
 
 ### **Epic: T6E-1 – User Registration and Login**
 
