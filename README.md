@@ -25,4 +25,4 @@ Welcome to the project repository for Team 06 – Schmendrick's Fools. Our team 
 - The video presentation of our project plan can be found [here](https://www.loom.com/share/7142791640534e538a6149a22727e63b?sid=3d86df32-d01c-465d-b08b-35380c3de78b).
 
 ## Requirements
-- The requirements for this project can be found [here]()
+- The requirements for this project can be found [here](project-requirements/).
