@@ -1,0 +1,61 @@
+@startuml
+
+@startuml
+left to right direction
+
+actor "New Customer" as NC
+actor "Returning Customer" as RC
+actor "Admin" as Admin
+
+
+
+rectangle "Fantasy Weapon Blacksmith System" as System {
+  (Visit Webpage) as UC1
+  (Create Account) as UC2
+  (Log in) as UC3
+  (Browse / Search Inventory) as UC4
+  (Add / Remove Item from Cart) as UC5
+  (Check Out) as UC6
+  (Process Payment) as UC7
+  (Enter Shipping and Payment Information) as UC8
+  (Confirm Order) as UC9
+  (Check Order Status) as UC10
+  (View / Export Sales Report) as UC11
+  (View Item Sold) as UC12
+  (Add/Delete Items to Inventory) as UC13
+}
+
+
+actor "Bank" as Bank
+actor "Shipper" as Shipper
+
+NC -- UC1
+NC -- UC2
+NC -- UC3
+
+RC -- UC3
+RC -- UC4
+RC -- UC5
+RC -- UC6
+UC8 -- Bank
+UC8 -- Shipper
+RC -- UC7
+RC -- UC8
+RC -- UC9
+RC -- UC10
+
+UC11 -- Admin
+UC12 -- Admin
+UC13 -- Admin
+
+
+
+
+
+
+
+
+
+@enduml
+
+

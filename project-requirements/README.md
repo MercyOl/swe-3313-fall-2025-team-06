@@ -9,7 +9,7 @@
 ---
 
 ## Use Case Diagram
-#### [short blurb about use case diagram and link to it]
+#### The Use Case Diagram can be found [here]()
 ---
 
 ## Decision Table
