@@ -17,4 +17,4 @@
 ---
 
 ## Video Presentation
-#### [short blurb about presentation and link]
+#### Here's a short presentation going over the requirements. You can find [here](https://www.loom.com/share/fc22545a63ce4b7582b516e69d1ae62c?sid=fa5f050b-74eb-4e33-b78a-501cb9e6f190).
