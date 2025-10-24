@@ -9,7 +9,7 @@
 ---
 
 ## Use Case Diagram
-#### The Use Case Diagram can be found [here]()
+#### The Use Case Diagram can be found [here](project-requirements/use-case.md)
 ---
 
 ## Decision Table
