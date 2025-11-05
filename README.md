@@ -26,3 +26,7 @@ Welcome to the project repository for Team 06 – Schmendrick's Fools. Our team 
 
 ## Requirements
 - The requirements for this project can be found [here](project-requirements/).
+
+## User Interface Design
+- High-fidelity UI Mockup made with Marvel can be found [here](https://marvelapp.com/prototype/11de3651).
+- The video presentation of our user interface can be found [here](https://www.loom.com/share/79ee95996d99461f83eefe161f77a012).
