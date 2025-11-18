@@ -1,8 +1,8 @@
 # Technical Design
 ## Table of Contents
-- Languages
-- Frameworks
-- Data Storage Plan
+- (Languages)[https://github.com/MercyOl/swe-3313-fall-2025-team-06/tree/main/technical-design#languages]
+- (Frameworks)[https://github.com/MercyOl/swe-3313-fall-2025-team-06/tree/main/technical-design#frameworks]
+- (Data Storage Plan)[https://github.com/MercyOl/swe-3313-fall-2025-team-06/tree/main/technical-design#data-storage-plan]
 - Entity Relationship Diagram
 - Entity/Field Descriptions
 - Data Examples
