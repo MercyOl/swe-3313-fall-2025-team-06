@@ -37,8 +37,6 @@ The full data storage life cycle will contain the following steps:
 
 ## ERD Diagram
 
-## Entity/Field Description
-
 ```mermaid
 erDiagram
 	User {
@@ -96,6 +94,7 @@ erDiagram
 	Order||--||Payment_Card:"contains"
 	Payment_Card}|--||Card_Info:"contains"
 ```
+## Entity/Field Description
 
 ### User:
 | Property | Type                       | Default | Nullable | Relationship | Notes                           |
