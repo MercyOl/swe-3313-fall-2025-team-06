@@ -232,6 +232,7 @@ erDiagram
 These coding guidelines ensure that all contributors write code that is consistent, readable, easy to maintain, and aligned with best practices.  
 Inspired by [Cornell University’s Java Code Style Guidelines](https://www.cs.cornell.edu/courses/JavaAndDS/JavaStyle.html#Indentation). 
 A draft of this style guide was written, and AI was used to format it into markdown and refine the guide. Java syntax examples were written using pseudocode and formatted in Java by AI.
+
 ---
 
 ## 1. Technology Stack Overview
