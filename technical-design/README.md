@@ -231,7 +231,7 @@ erDiagram
 
 These coding guidelines ensure that all contributors write code that is consistent, readable, easy to maintain, and aligned with best practices.  
 Inspired by [Cornell University’s Java Code Style Guidelines](https://www.cs.cornell.edu/courses/JavaAndDS/JavaStyle.html#Indentation). 
-
+A draft of this style guide was written, and AI was used to format it into markdown and refine the guide. Java syntax examples were written using pseudocode and formatted in Java by AI.
 ---
 
 ## 1. Technology Stack Overview
@@ -265,7 +265,7 @@ Inspired by [Cornell University’s Java Code Style Guidelines](https://www.cs.c
 
 - Parameter names should be short but meaningful.  
 - Declare local variables close to first use.  
-- Avoid abbreviations unless widely understood (e.g., `id`, `url`).  
+- Avoid abbreviations unless widely understood (i.e., `url`).  
 
 ---
 
@@ -274,7 +274,7 @@ Inspired by [Cornell University’s Java Code Style Guidelines](https://www.cs.c
 ### 3.1 Formatting
 
 - Use the **tab key** for indentation.  
-- Keep lines under **100 characters** when possible.  
+- Keep lines under **100 characters**. 
 - Opening braces stay on the same line:  
   ```java
   if (condition) {
