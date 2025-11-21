@@ -8,7 +8,7 @@
 - Data Examples
 - Database Seed Data
 - Authentication and Authorization Plan
-- Coding Style Guide
+- [Coding Style Guide](https://github.com/MercyOl/swe-3313-fall-2025-team-06/edit/main/technical-design/README.md#coding-guidelines)
 
 ## Languages
 Schmendrick's Weaponry will be implemented with **Java 23** due to the following:
@@ -224,3 +224,170 @@ erDiagram
 | 1        | 5555 5555 5555 4444  |
 | 3        | 3782 822463 10005    | 
 
+
+
+
+# Coding Style Guide
+
+These coding guidelines ensure that all contributors write code that is consistent, readable, easy to maintain, and aligned with best practices.  
+Inspired by [Cornell University’s Java Code Style Guidelines](https://www.cs.cornell.edu/courses/JavaAndDS/JavaStyle.html#Indentation). 
+
+---
+
+## 1. Technology Stack Overview
+
+- **Language:** Java 23  
+- **Framework:** Spring  
+- **Build System:** Maven  
+- **Data Storage (v1):** JSON  
+- **Runtime Environments:** Windows 11 and Linux  
+- **IDE:** IntelliJ IDEA  
+- **Source Control:** GitHub, with branching and code review workflow  
+
+---
+
+## 2. Code Style & Naming Conventions
+
+### 2.1 Naming Standards
+
+- **Classes & Interfaces:** PascalCase  
+  - Example: `InventoryManager`
+- **Methods, Fields, Local Variables:** camelCase  
+  - Example: `calculateTotal`
+- **Constants:** UPPER_SNAKE_CASE (`static final`)  
+  - Example: `OVERNIGHT_SHIPPING_RATE`
+- **Packages:** lowercase, dot-separated  
+  - Example: `com.example.store.service`
+- **Boolean Variables:** prefix with `is`, `has`, or `can`  
+  - Example: `isSold`, `isAvailable`
+
+### 2.2 General Naming Guidance
+
+- Parameter names should be short but meaningful.  
+- Declare local variables close to first use.  
+- Avoid abbreviations unless widely understood (e.g., `id`, `url`).  
+
+---
+
+## 3. Formatting & Code Structure
+
+### 3.1 Formatting
+
+- Use the **tab key** for indentation.  
+- Keep lines under **100 characters** when possible.  
+- Opening braces stay on the same line:  
+  ```java
+  if (condition) {
+      ...
+  }
+  ```
+- Always use braces for control structures.  
+- One statement per line.  
+- Use blank lines to separate logical code sections.  
+- Prefer explicit types when it improves clarity.
+
+---
+
+## 4. Documentation & Commenting
+
+### 4.1 Javadoc Expectations
+
+All **public classes** and **methods** must include Javadoc describing:
+
+- Purpose of the class/method  
+- Summary of the return value  
+- Preconditions or any other notes if available
+
+That way, team members can understand the code, even if they did not write it themselves.
+
+### 4.2 In-Method Comments
+
+- Explain **what** a block of code does.  
+- Add a blank line after the comment.
+
+Example:
+```java
+// Calculates the total cost of items in the cart
+BigDecimal subtotal = calculateSubtotal(cart);
+```
+
+Do not comment too much. Assume the viewer has basic Java Knowledge.
+
+---
+
+## 5. Design Principles & Code Organization
+
+- Avoid combining unrelated responsibilities in a single class.  
+- Prefer layering: controllers → services → models.  
+- Place fields and class-level variables at the top of the class.  
+- Use encapsulation:  
+  - `public` for what the user can see and access
+  - `private` for internal functions
+- Static variables should generally be private.
+
+---
+
+## 6. Best Practices for Java
+
+### 6.1 Exceptions & Naming
+
+- Use standard exceptions when possible (e.g., `IllegalArgumentException`).  
+- Custom exceptions must clearly describe the issue (e.g., `DuplicateProductException`).  
+- Avoid outdated methods or APIs.
+
+---
+
+## 7. Money & Numerical Handling
+
+### 7.1 Use BigDecimal for All Money
+
+```java
+new BigDecimal("1000.00");
+```
+
+- Do not use `double` or `float` for currency.
+
+### 7.2 JSON Storage
+
+Store monetary values as **strings with two decimal places**:
+
+```json
+"price": "50.00"
+```
+
+### 7.3 Display Formatting
+
+Use:
+```java
+NumberFormat.getCurrencyInstance(Locale.US)
+```
+For values like `$100.00`.
+
+---
+
+## 8. GitHub Workflow
+
+### 8.1 Branching
+
+- **main:** where we store the final implementation
+- **develop:** where will integrate
+- **feature branches:**  If you want to work on a specific feature. Name it as shown below.
+  ```
+  feature/<description>
+  ```
+
+### 8.2 Commit Messages
+
+Use **Conventional Commits** (short, descriptive):
+
+```
+feat(cart): add subtotal calculation
+fix(auth): resolve token expiration bug
+```
+
+### 8.3 Pull Requests
+
+- Pull requests must target `develop` or `main`.  
+- Require 1–2 team members to review.  
+
+---
