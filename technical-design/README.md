@@ -225,6 +225,10 @@ erDiagram
 | 3        | 3782 822463 10005    | 
 
 
+## Database Seed Data
+Our database will have 2 types of seed data: Items and Users. There will be 14 items in the database, as well as 1 generic admin account saved.
+
+
 
 
 # Coding Style Guide
