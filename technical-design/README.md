@@ -3,7 +3,7 @@
 - [Languages](https://github.com/MercyOl/swe-3313-fall-2025-team-06/tree/main/technical-design#languages)
 - [Frameworks](https://github.com/MercyOl/swe-3313-fall-2025-team-06/tree/main/technical-design#frameworks)
 - [Data Storage Plan](https://github.com/MercyOl/swe-3313-fall-2025-team-06/tree/main/technical-design#data-storage-plan)
-- Entity Relationship Diagram
+- [Entity Relationship Diagram](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/README.md#erd-diagram)
 - Entity/Field Descriptions
 - Data Examples
 - Database Seed Data
