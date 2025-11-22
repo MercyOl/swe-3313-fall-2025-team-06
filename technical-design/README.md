@@ -229,7 +229,7 @@ erDiagram
 Our database will have 2 types of seed data: Items and Users. There will be 14 items in the database, as well as 1 generic admin account saved.
 
 ![ItemSeedData](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/SeedData_Item.png)
-![UserSeedData](
+![UserSeedData](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/SeedData_User.png)
 
 
 # Coding Style Guide
