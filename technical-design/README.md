@@ -7,7 +7,7 @@
 - [Entity/Field Descriptions](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/README.md#entityfield-description)
 - [Data Examples](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/README.md#data-examples)
 - [Database Seed Data](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/README.md#database-seed-data)
-- Authentication and Authorization Plan
+- [Authentication and Authorization Plan](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/README.md#authentication-and-authorization)
 - [Coding Style Guide](https://github.com/MercyOl/swe-3313-fall-2025-team-06/edit/main/technical-design/README.md#coding-guidelines)
 
 ## Languages
