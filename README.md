@@ -26,3 +26,6 @@ Welcome to the project repository for Team 06 – Schmendrick's Fools. Our team 
 
 ## Requirements
 - The requirements for this project can be found [here](project-requirements/).
+
+## Technical Design
+- The outline of our technical design for this project can be found [here](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/README.md)
