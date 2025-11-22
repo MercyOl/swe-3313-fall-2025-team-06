@@ -242,22 +242,24 @@ After login, every request goes through Spring Security. Spring checks the sessi
 
 ###Example code:
 
-`public final class User {`
-	`private String id;`
-	`private String email;`
-	`private String password;`
-	`private Set<String> roles;`
-	`private Set<String> permissions;`
-	`private boolean isAdmin;`
-	`// getters`
-	`@Override`
-	`public boolean equals(User u){`
-		`if(u.getEmail() == email && u.getPassword() == password){`
+```
+public final class User {
+	private String id;
+	private String email;
+	private String password;
+	private Set<String> roles;
+	private Set<String> permissions;
+	private boolean isAdmin;
+	// getters
+	@Override
+	public boolean equals(User u){
+		if(u.getEmail() == email && u.getPassword() == password){
 			return true;
 		}
 		return false
 	}
-}`
+}
+```
 
 `public Authentication authenticate(String email, String password, List<User> users) {
     // find the user
