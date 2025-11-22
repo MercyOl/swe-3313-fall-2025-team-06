@@ -261,7 +261,8 @@ public final class User {
 }
 ```
 
-`public Authentication authenticate(String email, String password, List<User> users) {
+```
+public Authentication authenticate(String email, String password, List<User> users) {
     // find the user
     User user = null;
 	for(int i = 0; i < users.size(); i++){
@@ -279,7 +280,8 @@ public final class User {
     }
     // create Authentication object
     return new UsernamePasswordAuthenticationToken(user.getId(), null, auth);
-}`
+}
+```
 
 
 # Coding Style Guide
