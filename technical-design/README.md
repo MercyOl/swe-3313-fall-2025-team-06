@@ -5,8 +5,8 @@
 - [Data Storage Plan](https://github.com/MercyOl/swe-3313-fall-2025-team-06/tree/main/technical-design#data-storage-plan)
 - [Entity Relationship Diagram](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/README.md#erd-diagram)
 - [Entity/Field Descriptions](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/README.md#erd-diagram)
-- [Data Examples](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/README.md#erd-diagram)
-- Database Seed Data
+- [Data Examples](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/README.md#data-examples)
+- [Database Seed Data](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/README.md#database-seed-data)
 - Authentication and Authorization Plan
 - [Coding Style Guide](https://github.com/MercyOl/swe-3313-fall-2025-team-06/edit/main/technical-design/README.md#coding-guidelines)
 
