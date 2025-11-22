@@ -240,7 +240,7 @@ While building the Authentication we turn the user’s roles/permissions into Sp
 After login, every request goes through Spring Security. Spring checks the session, gets the Authentication, and enforces our rules. 
 
 
-###Example code:
+### Example code:
 
 ```
 public final class User {
@@ -289,6 +289,7 @@ public Authentication authenticate(String email, String password, List<User> use
 }
 ```
 
+---
 
 # Coding Style Guide
 
