@@ -224,12 +224,60 @@ erDiagram
 | 1        | 5555 5555 5555 4444  |
 | 3        | 3782 822463 10005    | 
 
-
+---
 ## Database Seed Data
 Our database will have 2 types of seed data: Items and Users. There will be 14 items in the database, as well as 1 generic admin account saved.
 
 ![ItemSeedData](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/SeedData_Item.png)
 ![UserSeedData](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/SeedData_User.png)
+
+---
+## Authentication and Authorization
+Everyone logs in using the same log-in screen. When someone types their email and password the system looks up their record in json. The system authenticates the user by using their email and password to lookup their user ID.
+
+While building the Authentication we turn the user’s roles/permissions into Spring GrantedAuthority objects (we can also add a special authority like IS_ADMIN when isAdmin == true). We can then put the isAdmin flag from the database on the GrantedAuthority objects so service code can check principal.isAdmin() directly.
+
+After login, every request goes through Spring Security. Spring checks the session, gets the Authentication, and enforces our rules. 
+
+
+###Example code:
+
+`public final class User {
+	private String id;
+	private String email;
+	private String password;
+	private Set<String> roles;
+	private Set<String> permissions;
+	private boolean isAdmin;
+	// getters
+	@Override
+	public boolean equals(User u){
+		if(u.getEmail() == email && u.getPassword() == password){
+			return true;
+		}
+		return false
+	}
+}`
+
+`public Authentication authenticate(String email, String password, List<User> users) {
+    // find the user
+    User user = null;
+	for(int i = 0; i < users.size(); i++){
+		if(users.get(i).equals(new User(email, password))){
+			user = users.get(i);
+		}
+	}
+    if (user == null) return null;		// fail if not found
+    // build authorities
+    Set<GrantedAuthority> auth = new HashSet<>();
+    user.getRoles().forEach(r -> auth.add(new SimpleGrantedAuthority(r)));
+    user.getPermissions().forEach(p -> auth.add(new SimpleGrantedAuthority(p)));
+    if (user.getAdmin()) {
+        auth.add(new SimpleGrantedAuthority("IS_ADMIN"));
+    }
+    // create Authentication object
+    return new UsernamePasswordAuthenticationToken(user.getId(), null, auth);
+}`
 
 
 # Coding Style Guide
