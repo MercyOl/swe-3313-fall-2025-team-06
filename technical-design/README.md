@@ -9,6 +9,7 @@
 - [Database Seed Data](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/README.md#database-seed-data)
 - [Authentication and Authorization Plan](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/README.md#authentication-and-authorization)
 - [Coding Style Guide](https://github.com/MercyOl/swe-3313-fall-2025-team-06/edit/main/technical-design/README.md#coding-guidelines)
+- [Technical Design Presentation](https://github.com/MercyOl/swe-3313-fall-2025-team-06/edit/main/technical-design/README.md#presentation)
 
 ## Languages
 Schmendrick's Weaponry will be implemented with **Java 23** due to the following:
@@ -456,3 +457,6 @@ fix(auth): resolve token expiration bug
 - Require 1–2 team members to review.  
 
 ---
+
+# Presentation
+
