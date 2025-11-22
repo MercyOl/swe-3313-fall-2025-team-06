@@ -250,7 +250,9 @@ public final class User {
 	private Set<String> roles;
 	private Set<String> permissions;
 	private boolean isAdmin;
+	
 	// getters
+
 	@Override
 	public boolean equals(User u){
 		if(u.getEmail() == email && u.getPassword() == password){
@@ -270,14 +272,18 @@ public Authentication authenticate(String email, String password, List<User> use
 			user = users.get(i);
 		}
 	}
+
     if (user == null) return null;		// fail if not found
+
     // build authorities
     Set<GrantedAuthority> auth = new HashSet<>();
     user.getRoles().forEach(r -> auth.add(new SimpleGrantedAuthority(r)));
     user.getPermissions().forEach(p -> auth.add(new SimpleGrantedAuthority(p)));
+
     if (user.getAdmin()) {
         auth.add(new SimpleGrantedAuthority("IS_ADMIN"));
     }
+
     // create Authentication object
     return new UsernamePasswordAuthenticationToken(user.getId(), null, auth);
 }
