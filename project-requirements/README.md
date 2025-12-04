@@ -9,12 +9,12 @@
 ---
 
 ## Use Case Diagram
-#### The Use Case Diagram can be found [here](project-requirements/use-case.md)
+#### To better envision the different use cases of our product, we created a use case diagram which can be found [here](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/project-requirements/use-case.md).
 ---
 
 ## Decision Table
-#### [short blurb about our decision table and link to it]
+#### To lay out the rules and actions that affect client interaction, we created a decision table and a coded prototype of the decision table, found [here](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/project-requirements/decision-table.md).
 ---
 
 ## Video Presentation
-#### [short blurb about presentation and link]
+#### Here's a short presentation going over the requirements. You can find [here](https://www.loom.com/share/fc22545a63ce4b7582b516e69d1ae62c?sid=fa5f050b-74eb-4e33-b78a-501cb9e6f190).
