@@ -216,49 +216,92 @@
     }
 
     .checkout-button-wrapper {
-  margin-top: 24px;
-  text-align: center;
+       margin-top: 24px;
+       text-align: center;
 }
 
-.checkout-btn {
-  background: #4aa9ff;        /* blue background */
-  color: white;
-  border: none;
-  padding: 16px 28px;         /* bigger button */
-  font-size: 20px;            /* larger text */
-  font-weight: 700;
-  border-radius: 8px;
-  cursor: pointer;
-  width: 85%;                 /* wide button */
+     .checkout-btn {
+       background: #4aa9ff;
+        color: white;
+        border: none;
+        padding: 16px 28px;
+        font-size: 20px;
+        font-weight: 700;
+        border-radius: 8px;
+        cursor: pointer;
+        width: 85%;
+        transition: 0.2s ease;
+}
+
+      .checkout-btn:hover {
+        background: #238be6;
+}
+
+      .checkout-btn:active {
+        transform: scale(0.96);
+}
+      .logo {
+       font-weight: 700;
+        font-size: 20px;
+        white-space: nowrap;
+}
+
+.sub-nav {
+    background: #7b59b4; /* purple bar */
+    padding: 10px 20px;
+    display: flex;
+    gap: 25px;
+    align-items: center;
+}
+    .checkout-header {
+  background: var(--purple);
+  color: #ffffff;
+  padding: 18px 24px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+}
+
+.checkout-home {
+  font-size: 18px;
+  font-weight: 500;
+  text-decoration: none;
+  color: #ffffff;
+  opacity: 0.9;
   transition: 0.2s ease;
 }
 
-.checkout-btn:hover {
-  background: #238be6;        /* darker blue hover */
+.checkout-home:hover {
+  opacity: 1;
+  text-decoration: underline;
 }
 
-.checkout-btn:active {
-  transform: scale(0.96);
+.checkout-title {
+  flex: 1;                /* pushes Checkout to the center */
+  text-align: center;
+  font-size: 32px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
 }
+
+
+
   </style>
 </head>
 <body>
 
 <div class="top-bar">
   <div class="top-bar-inner">
-    <div class="logo">Logo</div>
-    <div class="search-wrapper">
-      <input type="text" placeholder="Search" />
-      <div class="search-icon">🔍</div>
-    </div>
-    <a href="#" class="cart-link">🛒 <span>Cart</span></a>
+    <div class="logo">Shmendrick's Wearponry</div>
   </div>
 </div>
 
-<div class="checkout-header">Checkout</div>
+<div class="checkout-header">
+  <a href="/" class="checkout-home">Home</a>
+  <span class="checkout-title">Checkout</span>
+</div>
 
 <div class="page">
-  <a href="#" class="back-link">&lt; Home</a>
 
   <div class="checkout-layout">
     <!-- LEFT -->
