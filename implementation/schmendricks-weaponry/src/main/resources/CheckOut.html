@@ -25,7 +25,7 @@
     }
     a { color: inherit; text-decoration: none; }
 
-    .top-bar { background: #cbefff; padding: 8px 0; }
+    .top-bar { background: #0d1b46; padding: 10px 0; }
     .top-bar-inner {
       max-width: 1200px;
       margin: 0 auto;
@@ -36,28 +36,6 @@
     }
     .logo { font-weight: 600; font-size: 20px; }
 
-    .search-wrapper {
-      flex: 1;
-      display: flex;
-      border-radius: 4px;
-      overflow: hidden;
-      border: 1px solid var(--border);
-      background: #ffffff;
-    }
-    .search-wrapper input {
-      border: none;
-      padding: 8px 10px;
-      flex: 1;
-      font-size: 14px;
-      outline: none;
-    }
-    .search-icon {
-      padding: 0 10px;
-      display: flex;
-      align-items: center;
-      border-left: 1px solid var(--border);
-      font-size: 14px;
-    }
     .cart-link {
       display: flex;
       align-items: center;
@@ -241,13 +219,18 @@
         transform: scale(0.96);
 }
       .logo {
-       font-weight: 700;
-        font-size: 20px;
-        white-space: nowrap;
+        display: flex;
+        align-items: center;
+}
+
+      .logo-img {
+        height: 48px;   /* Adjust this to fit your header cleanly */
+        width: auto;
+        display: block;
 }
 
       .sub-nav {
-        background: #7b59b4; /* purple bar */
+        background: #7b59b4;
         padding: 10px 20px;
         display: flex;
         gap: 25px;
@@ -292,9 +275,16 @@
 
 <div class="top-bar">
   <div class="top-bar-inner">
-    <div class="logo">Shmendrick's Wearponry</div>
+    <div class="logo">
+      <img
+        th:src="@{/images/Logo.png}"
+        src="/images/Logo.png"
+        alt="Schmendrick's Weaponry"
+        class="logo-img">
+    </div>
   </div>
 </div>
+
 
 <div class="checkout-header">
   <a href="/" class="checkout-home">Home</a>
