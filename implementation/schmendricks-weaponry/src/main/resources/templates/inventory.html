@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Schmendrick's Weaponry</title>
+
+    <style>
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background-color: #f5f7fb;
+        }
+
+        /*HEADER*/
+        .header {
+            background-color: #0b1f52;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 40px;
+            align-items: center;
+            font-size: 22px;
+        }
+        .logo { font-size: 26px; font-weight: bold; }
+        .logo span { font-size: 32px; }
+        .profile { display: flex; align-items: center; gap: 10px; font-size: 18px; }
+        .profile-img { width: 45px; height: 45px; background: #eee; border-radius: 50%; }
+
+        /* SEARCH SECTION*/
+        .search-section {
+            background-color: #a1d7f5;
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .search-container {
+            display: flex;
+            background: white;
+            border-radius: 6px;
+            padding: 5px 10px;
+            width: 60%;
+            align-items: center;
+        }
+        .search-container input {
+            width: 100%;
+            border: none;
+            padding: 8px;
+            font-size: 18px;
+            outline: none;
+        }
+        .cart { font-size: 20px; font-weight: bold; cursor: pointer; }
+
+        /* NAVBAR */
+        .navbar {
+            background-color: #7d5ba6;
+            display: flex;
+            padding: 10px 40px;
+            gap: 40px;
+            color: white;
+            font-size: 18px;
+        }
+        .navbar div:hover { text-decoration: underline; cursor: pointer; }
+
+        /*SECTION TITLE */
+        .section-title {
+            font-size: 26px;
+            font-weight: bold;
+            margin: 40px 40px 10px;
+            color: #0b1f52;
+        }
+
+        /*  ITEM GRID */
+        .item-grid {
+            display: flex;               /* use flexbox for wrapping cards */
+            flex-wrap: wrap;             /* wrap cards to new lines */
+            gap: 30px;                   /* space between cards */
+            padding: 0 40px 40px;        /* padding around grid */
+            justify-content: flex-start; /* left-align cards */
+        }
+
+        .item-card {
+            background-color: white;
+            width: 320px;                /* fixed card width */
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;      /* stack image + info vertically */
+            align-items: center;
+        }
+
+        /* ITEM IMAGE  */
+        .item-card img {
+            width: 300px;
+            height: auto;               /* maintain aspect ratio */
+            max-height: 300px;          /* prevent image from being too tall */
+            object-fit: contain;        /* avoid cropping */
+            border-radius: 6px;
+            background: #dfe3ec;
+        }
+
+        /* ITEM INFO  */
+        .item-card h3 {
+            font-size: 22px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+        .item-card p {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        /*  ADD TO CART BUTTON */
+        .add-btn {
+            width: 80%;
+            background: #0b1f52;
+            color: white;
+            border: none;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .add-btn:hover { opacity: 0.9; }
+
+
+        @media (max-width: 768px) {
+            .item-grid { justify-content: center; }
+            .item-card { width: 90%; }
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- HEADER: Logo + User Profile -->
+<div class="header">
+    <div class="logo"><span>Schmendrick's</span> Weaponry</div>
+    <div class="profile">
+        Name
+        <div class="profile-img"></div>
+    </div>
+</div>
+
+<!-- Search bar + Cart info -->
+<div class="search-section">
+    <div class="search-container">
+        🔍
+        <input type="text" id="searchBar" placeholder="Search">
+    </div>
+    <div class="cart" id="cartButton">
+        🛒 Cart: <span id="cartCount" th:text="${cartCount}">0</span>
+        | Total: $<span id="cartTotal">0.00</span>
+    </div>
+</div>
+
+<!-- SECTION TITLE -->
+<div class="section-title">Recommended</div>
+
+<!-- ITEM GRID -->
+<div class="item-grid" id="itemGrid">
+    <div class="item-card" th:each="item : ${items}" th:attr="data-id=${item.id}" th:data-price="${item.price}">
+        <!-- Item image -->
+        <img th:src="@{${item.image}}" th:alt="${item.name}">
+        <!-- Item info: name, description, price -->
+        <h3 th:text="${item.name}"></h3>
+        <p th:text="${item.description}"></p>
+        <p>Price: $<span th:text="${item.price}"></span></p>
+        <!-- Add to cart button -->
+        <button class="add-btn" th:onclick="'addToCart(' + ${item.id} + ', ' + ${item.price} + ')'">Add to Cart</button>
+    </div>
+</div>
+
+<script>
+    // Initialize cart count and total
+    let cartCount = parseInt(document.getElementById("cartCount").textContent);
+    let cartTotal = parseFloat(document.getElementById("cartTotal").textContent);
+
+    // Add item to cart function
+    function addToCart(id, price) {
+        fetch(`/inventory/add-to-cart/${id}`, { method: 'POST' })
+            .then(response => {
+                if (response.ok) {
+                    // Remove item card from page
+                    const card = document.querySelector(`.item-card[data-id='${id}']`);
+                    if (card) card.remove();
+
+                    // Update cart count
+                    cartCount += 1;
+                    document.getElementById("cartCount").textContent = cartCount;
+
+                    // Update cart total
+                    cartTotal += parseFloat(price);
+                    document.getElementById("cartTotal").textContent = cartTotal.toFixed(2);
+                } else {
+                    alert("Failed to add item to cart.");
+                }
+            });
+    }
+
+    // Client-side search functionality
+    const searchBar = document.getElementById("searchBar");
+    searchBar.addEventListener("input", () => {
+        const filter = searchBar.value.toLowerCase();
+        document.querySelectorAll(".item-card").forEach(card => {
+            const name = card.querySelector("h3").textContent.toLowerCase();
+            card.style.display = name.includes(filter) ? "flex" : "none"; // keep flex display for vertical stacking
+        });
+    });
+
+    // Cart button click: placeholder for future cart page
+    const cartButton = document.getElementById("cartButton");
+    cartButton.addEventListener("click", () => {
+        window.location.href = "/cart"; // TODO: replace with actual cart page
+    });
+</script>
+
+</body>
+</html>
