@@ -33,6 +33,10 @@ public class UserService {
 
     public void addUser(User newUser) throws IOException{
         ArrayList<User> userList = loadUsers();
+
+        // Set the new user's ID before adding to the list
+        newUser.setUserId(userList.size());
+
         userList.add(newUser);
         saveUsers(userList);
     }

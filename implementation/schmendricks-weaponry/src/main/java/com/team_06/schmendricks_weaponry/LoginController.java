@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 
@@ -25,26 +26,45 @@ public class LoginController {
 
 
     @PostMapping("/register")
-    public String registerNewUser(int userId, String username, String email, String password) {
+    public String registerNewUser(@RequestParam("username") String username, @RequestParam("email") String email, @RequestParam("password") String password, Model model) {
 
-        // CREATE A NEW USER IN THE DATABASE
-        User newUser = new User(userId, username, email, password);
+        // Create a new user
+        User newUser = new User(username, email, password);
 
+        // Load the users in the database to check
+        ArrayList<User> userList = loginService.loadUsers();
+
+        // Check the database to see if username or email are already in use
+        for(int i = 0; i < userList.size(); i++){
+            if(userList.get(i).getUsername().equals(username)) {
+                model.addAttribute("registerError", "Username already exists.");
+                return "LoginPage";
+            }
+
+            if(userList.get(i).getPassword().equals(email)){
+                model.addAttribute("registerError", "Email already in use.");
+                return "LoginPage";
+            }
+        }
+
+        //Add the new user to the database
         try {
 
-            // Add the new user to the database
             loginService.addUser(newUser);
 
         }catch(Exception e){
             System.out.println(e.getMessage());
         }
 
+        //Return success message
+        System.out.println("USER SUCCESSFULLY REGISTERED!");
+        model.addAttribute("registerSuccess", "Registration complete! Please log in.");
         return "LoginPage";
     }
 
 
     @PostMapping("/login")
-    public String loginUser(String username, String password){
+    public String loginUser(@RequestParam("username") String username, @RequestParam("password") String password, Model model){
 
         // Load the users in the database to check
         ArrayList<User> userList = loginService.loadUsers();
@@ -53,12 +73,14 @@ public class LoginController {
         for(int i = 0; i < userList.size(); i++){
             if(userList.get(i).getUsername().equals(username)){
                 if(userList.get(i).getPassword().equals(password)){
-                    return "HomePage";
+                    System.out.println("USER SUCCESSFULLY LOGGED IN!");
+                    return "HomePage";      //REPLACE WITH REDIRECT TO HOMEPAGE
                 }
             }
         }
 
-        return "LoginPage";
+        model.addAttribute("loginError", "Invalid email or password.");
+        return "LoginPage";  // reload the same page with error message
     }
 }
 

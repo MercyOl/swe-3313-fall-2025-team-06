@@ -263,11 +263,35 @@
       font-size: 20px;
     }
   }
+
+  .error-bar {
+    display: none; /* hidden by default */
+    background-color: #ffdddd;
+    border-left: 5px solid #ff4444;
+    color: #000;
+    padding: 10px;
+    margin-bottom: 15px;
+    border-radius: 4px;
+}
+
+  .success-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    color: #000;
+    background-color: #ddffdd;
+    border-top: 3px solid #33cc33;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    z-index: 1000;
+}
+
 </style>
 
 
 <body>
-
 
 <!-- Login Modal -->
 <div id="loginModal" class="modal-overlay">
@@ -279,6 +303,11 @@
       <input type="password" name="password" placeholder="Password" required>
       <button type="submit">Login</button>
     </form>
+
+    <div th:if="${loginError}" id="loginErrorModal" class="error-bar">
+      <p th:text="${loginError}"></p>
+    </div>
+  </div>
   </div>
 </div>
 
@@ -290,12 +319,21 @@
     <h2>Register</h2>
     <form th:action="@{/register}" method="post">
       <input type="text" name="username" placeholder="Username" required>
-      <input type="password" name="password" placeholder="Password" required>
+      <input type="text" name="email" placeholder="Email" required>
+      <input type="text" name="password" placeholder="Password" required>
       <button type="submit">Register</button>
     </form>
+
+    <!-- Error message inside the modal -->
+    <div th:if="${registerError}" id="registerErrorModal" class="error-bar">
+      <p th:text="${registerError}"></p>
+    </div>
   </div>
 </div>
 
+<div id="successBar" class="success-bar" style="display: none;">
+  <p th:text="${registerSuccess}"></p>
+</div>
 
 <script>
   function showModal(id) {
@@ -304,7 +342,23 @@
   function closeModal(id) {
     document.getElementById(id).style.display = 'none';
   }
+
 </script>
+
+<script th:if="${registerError}">
+  showModal('registerModal'); // opens the modal if there's an error
+  document.getElementById('registerErrorModal').style.display = 'block'; //shows the error
+</script>
+
+<script th:if="${registerSuccess}">
+  document.getElementById('successBar').style.display = 'block';
+</script>
+
+<script th:if="${loginError}">
+  showModal('loginModal'); // opens the modal if there's an error
+  document.getElementById('loginErrorModal').style.display = 'block'; //shows the error
+</script>
+
 </body>
 
 
