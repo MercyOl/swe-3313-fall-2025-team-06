@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <title>Payment</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+  <style>
+    :root {
+      --purple: #6b4ca5;
+      --blue-light: #8fd2f3;
+      --border: #d4d8e0;
+      --text-main: #1f2640;
+      --text-muted: #6b7385;
+      --bg-page: #f2f6fb;
+      --card-bg: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Montserrat", system-ui, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+    }
+    a { color: inherit; text-decoration: none; }
+
+
+    .top-bar { background: #0d1b46; padding: 10px 0; }
+    .top-bar-inner {
+      max-width: 1200px;
+      margin: 0 ;
+      display: flex;
+      align-items: center;
+      padding: 0 ;
+    }
+    .logo-img { height: 48px; width: auto; }
+
+
+    .checkout-header {
+      background: var(--purple);
+      color: white;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .checkout-home {
+      font-size: 18px;
+      opacity: .9;
+      transition: .2s;
+    }
+    .checkout-home:hover { opacity: 1; text-decoration: underline; }
+    .checkout-title {
+      flex: 1;
+      text-align: center;
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+
+    .back-link {
+      margin-bottom: 12px;
+      font-size: 14px;
+    }
+    .back-link a {
+      text-decoration: underline;
+      color: var(--text-main);
+    }
+
+
+    /* Layout: payment left + summary right */
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.7fr);
+      gap: 18px;
+    }
+
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 16px 18px 20px;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px 16px;
+    }
+    .form-group { display: flex; flex-direction: column; font-size: 13px; }
+    .form-group.full-width { grid-column: 1 / -1; }
+
+
+    .form-group label { margin-bottom: 4px; font-weight: 500; }
+    .form-group input {
+      padding: 8px 10px;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      font-size: 14px;
+    }
+
+
+    .checkout-button-wrapper { text-align: center; margin-top: 24px; }
+    .checkout-btn {
+      background: #4aa9ff;
+      color: white;
+      padding: 16px 28px;
+      border-radius: 8px;
+      border: none;
+      font-size: 20px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 85%;
+      transition: 0.2s ease;
+    }
+    .checkout-btn:hover { background: #238be6; }
+    .checkout-btn:active { transform: scale(0.96); }
+
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+    .summary-line.total {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid var(--border);
+      font-size: 18px;
+      font-weight: 700;
+    }
+
+
+    .cart-items {
+      margin-top: 18px;
+      padding-top: 16px;
+      border-top: 1px solid var(--border);
+    }
+
+
+    .cart-item {
+      display: grid;
+      grid-template-columns: 80px 1fr;
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cart-thumb {
+      width: 80px;
+      height: 80px;
+      background: #e2e6f0;
+      border-radius: 3px;
+    }
+    .cart-info-title { font-weight: 600; margin-bottom: 4px; }
+    .cart-info-detail { font-size: 13px; color: var(--text-muted); margin-bottom: 2px; }
+    .cart-info-price { font-size: 14px; font-weight: 500; margin-top: 4px; }
+
+
+    @media (max-width: 900px) {
+      .checkout-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .card { padding: 14px; }
+      .form-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+
+
+<body>
+
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <img th:src="@{/images/img.png}" src="/images/img.png" class="logo-img"
+         alt="Schmendrick's Weaponry">
+  </div>
+</div>
+
+
+<div class="checkout-header">
+  <a href="/" class="checkout-home">Home</a>
+  <span class="checkout-title">Payment</span>
+</div>
+
+
+<div class="page">
+
+
+  <!-- 🔙 Back to delivery / checkout -->
+  <div class="back-link">
+    <a th:href="@{/checkout}">&larr; Back to Checkout</a>
+  </div>
+
+
+  <!-- Layout: left payment, right summary -->
+  <div class="checkout-layout">
+
+
+    <!-- LEFT: PAYMENT FORM -->
+    <div class="card">
+      <div class="card-header">
+        <span>Credit Card</span>
+        <img th:src="@{/images/payment-logos.png}"
+             src="/images/payment-logos.png"
+             alt="Accepted cards"
+             style="height:24px; width:auto;">
+      </div>
+
+
+      <form class="form-grid">
+        <div class="form-group full-width">
+          <label>Card Number<span class="required">*</span></label>
+          <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
+        </div>
+
+
+        <div class="form-group">
+          <label>Expiration (MM/YY)<span class="required">*</span></label>
+          <input type="text" placeholder="MM/YY" maxlength="5">
+        </div>
+
+
+        <div class="form-group">
+          <label>Security Code<span class="required">*</span></label>
+          <input type="text" placeholder="3 digits" maxlength="4">
+        </div>
+
+
+        <div class="form-group full-width">
+          <label>Name on Card<span class="required">*</span></label>
+          <input type="text" placeholder="e.g. Jake Burton Carpenter">
+        </div>
+      </form>
+
+
+      <div class="checkout-button-wrapper">
+        <form th:action="@{/confirmation}" method="get">
+          <button type="submit" class="checkout-btn">
+            Pay Now
+          </button>
+        </form>
+      </div>
+    </div>
+
+
+    <!-- RIGHT: ORDER SUMMARY -->
+    <div class="card">
+      <div class="card-header">
+        <span>Order Summary</span>
+      </div>
+
+
+      <div class="summary-line">
+        <span>Subtotal:</span>
+        <span th:text="${#numbers.formatDecimal(cart.subtotal, 1, 'COMMA', 2, 'POINT')}">
+                   $000.00
+               </span>
+      </div>
+
+
+      <div class="summary-line">
+        <span>Estimated Shipping:</span>
+        <span th:text="${#numbers.formatDecimal(cart.estimatedShipping, 1, 'COMMA', 2, 'POINT')}">
+                   $000.00
+               </span>
+      </div>
+
+
+      <div class="summary-line">
+        <span>Estimated Tax:</span>
+        <span th:text="${#numbers.formatDecimal(cart.estimatedTax, 1, 'COMMA', 2, 'POINT')}">
+                   $000.00
+               </span>
+      </div>
+
+
+      <div class="summary-line total">
+        <span>Total:</span>
+        <span th:text="${#numbers.formatDecimal(cart.total, 1, 'COMMA', 2, 'POINT')}">
+                   $000.00
+               </span>
+      </div>
+
+
+      <div class="cart-items">
+        <div th:each="item : ${cart.items}" class="cart-item">
+          <div class="cart-thumb"></div>
+          <div>
+            <div class="cart-info-title" th:text="${item.title}">Item title</div>
+            <div class="cart-info-detail" th:text="${item.description}">
+              Item description
+            </div>
+            <div class="cart-info-price">
+              Price:
+              <span th:text="${#numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')}">
+                               $000.00
+                           </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div> <!-- /.checkout-layout -->
+</div> <!-- /.page -->
+
+
+</body>
+</html>
