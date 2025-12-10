@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<script>
+  //HTML CREATED WITH CHATGPT (SLIGHTLY MODIFIED)
+</script>
+
+<head>
+  <meta charset="UTF-8" />
+  <title>Order Confirmation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+
+  <style>
+    :root {
+      --purple: #6b4ca5;
+      --blue-light: #8fd2f3;
+      --border: #d4d8e0;
+      --text-main: #1f2640;
+      --text-muted: #6b7385;
+      --bg-page: #f2f6fb;
+      --card-bg: #ffffff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Montserrat", system-ui, sans-serif;
+      background: var(--bg-page);
+      color: var(--text-main);
+    }
+    a { color: inherit; text-decoration: none; }
+
+
+    .top-bar { background: #0d1b46; padding: 10px 0; }
+    .top-bar-inner {
+      max-width: 1200px;
+      margin: 0;
+      display: flex;
+      align-items: center;
+      padding: 0 16px;
+    }
+    .logo-img {
+      height: 48px;
+      width: auto;
+      display: block;
+    }
+
+
+    .checkout-header {
+      background: var(--purple);
+      color: #ffffff;
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .checkout-home {
+      font-size: 18px;
+      font-weight: 500;
+      text-decoration: none;
+      color: #ffffff;
+      opacity: 0.9;
+      transition: 0.2s ease;
+    }
+    .checkout-home:hover {
+      opacity: 1;
+      text-decoration: underline;
+    }
+    .checkout-title {
+      flex: 1;
+      text-align: center;
+      font-size: 32px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+
+
+    .page {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+
+    .checkout-layout {
+      display: grid;
+      grid-template-columns: minmax(0, 2fr) minmax(0, 1.7fr);
+      gap: 18px;
+    }
+
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 16px 18px 20px;
+    }
+    .card-header {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 18px;
+      font-weight: 600;
+    }
+
+
+    .summary-line {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+
+    .summary-line.total {
+      margin-top: 8px;
+      font-weight: 700;
+      font-size: 18px;
+      border-top: 1px solid var(--border);
+      padding-top: 8px;
+    }
+
+
+    .summary-amount { font-family: "Courier New", monospace; }
+
+
+    .cart-items {
+      margin-top: 18px;
+      border-top: 1px solid var(--border);
+      padding-top: 16px;
+    }
+    .cart-item {
+      display: grid;
+      grid-template-columns: 80px minmax(0, 1fr);
+      gap: 10px;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .cart-thumb {
+      width: 80px;
+      height: 80px;
+      border-radius: 3px;
+      background: #e2e6f0;
+    }
+    .cart-info-title { font-weight: 600; margin-bottom: 4px; }
+    .cart-info-detail { font-size: 13px; color: var(--text-muted); margin-bottom: 2px; }
+    .cart-info-price { font-size: 14px; font-weight: 500; margin-top: 4px; }
+
+
+    .confirm-main-text {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+    .confirm-sub {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+    .confirm-detail {
+      font-size: 15px;
+      margin-bottom: 6px;
+    }
+    .confirm-detail span.label {
+      font-weight: 600;
+    }
+
+
+    .confirm-actions {
+      margin-top: 22px;
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      background: #4aa9ff;
+      color: white;
+      border: none;
+      padding: 12px 20px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .btn-primary:hover { background: #238be6; }
+    .btn-secondary {
+      background: transparent;
+      color: var(--purple);
+      border: 1px solid var(--purple);
+      padding: 11px 18px;
+      font-size: 15px;
+      font-weight: 600;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s ease;
+    }
+    .btn-secondary:hover {
+      background: rgba(107, 76, 165, 0.06);
+    }
+
+
+    @media (max-width: 900px) {
+      .checkout-layout { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .card { padding: 14px; }
+    }
+  </style>
+</head>
+<body>
+
+
+<div class="top-bar">
+  <div class="top-bar-inner">
+    <div class="logo">
+      <img
+              th:src="@{/images/img.png}"
+              src="/images/img.png"
+              alt="Schmendrick's Weaponry"
+              class="logo-img"
+      />
+    </div>
+  </div>
+</div>
+
+
+<div class="checkout-header">
+  <a href="/inventory" class="checkout-home">Home</a>
+  <span class="checkout-title">Order Confirmation</span>
+</div>
+
+
+<div class="page">
+
+
+  <div class="checkout-layout">
+
+
+    <div class="card">
+      <div class="card-header">
+        <span>Thank you for your order!</span>
+      </div>
+
+
+      <div class="confirm-main-text">
+        🎉 Your order has been placed.
+      </div>
+
+
+      <div class="confirm-sub">
+        A confirmation email has been sent to
+        <span th:text="${customerEmail}">example@email.com</span>.
+      </div>
+
+
+      <div class="confirm-detail">
+        <span class="label">Payment Method:</span>
+        <span th:text="${paymentMethod}">Visa ending in 4242</span>
+      </div>
+
+      <div class="confirm-detail">
+        <span class="label">Shipping Method:</span>
+        <span th:text="${shippingMethodName}">Ground (Free)</span>
+      </div>
+
+      <div class="confirm-detail">
+        <span class="label">Order number:</span>
+        <span th:text="${orderNumber}">#SW-000123</span>
+      </div>
+
+
+      <div class="confirm-detail">
+        <span class="label">Estimated delivery:</span>
+        <span th:text="${estimatedDelivery}">Wednesday, Oct 23 – Friday, Oct 25</span>
+      </div>
+
+
+      <div class="confirm-detail">
+        <span class="label">Shipping to:</span>
+        <span th:text="${shippingAddress}">123 Hero’s Way, Kennesaw, GA</span>
+      </div>
+
+
+      <div class="confirm-actions">
+        <a th:href="@{/inventory}" class="btn-primary">Continue Shopping</a>
+      </div>
+    </div>
+
+
+    <div class="card">
+      <div class="card-header">
+        <span>Order Summary</span>
+      </div>
+
+
+      <div class="summary-line">
+        <span>Subtotal:</span>
+        <span class="summary-amount" th:if="${cart?.subtotal != null}"
+              th:text="|$| + ${#numbers.formatDecimal(cart.subtotal, 1, 'COMMA', 2, 'POINT')}">
+                   $000.00
+               </span>
+        <span th:unless="${cart?.subtotal != null}">$0.00</span>
+      </div>
+      <div class="summary-line">
+        <span>Estimated Shipping:</span>
+        <span class="summary-amount" th:if="${cart?.estimatedShipping != null}"
+              th:text="|$| + ${#numbers.formatDecimal(cart.estimatedShipping, 1, 'COMMA', 2, 'POINT')}">
+                   $000.00
+               </span>
+        <span th:unless="${cart?.estimatedShipping != null}">$0.00</span>
+      </div>
+      <div class="summary-line">
+        <span>Estimated Tax:</span>
+        <span class="summary-amount" th:if="${cart?.estimatedTax != null}"
+              th:text="|$| + ${#numbers.formatDecimal(cart.estimatedTax, 1, 'COMMA', 2, 'POINT')}">
+                   $000.00
+               </span>
+        <span th:unless="${cart?.estimatedTax != null}">$0.00</span>
+      </div>
+
+
+      <div class="summary-line total">
+        <span>Total</span>
+        <span class="summary-amount" th:if="${cart?.total != null}"
+              th:text="|$| + ${#numbers.formatDecimal(cart.total, 1, 'COMMA', 2, 'POINT')}">
+                   $000.00
+               </span>
+        <span th:unless="${cart?.total != null}">$0.00</span>
+      </div>
+
+
+      <div class="cart-items">
+        <div th:each="item : ${cart?.cartItems}" class="cart-item">
+          <div class="cart-thumb"></div>
+          <div>
+            <div class="cart-info-title" th:text="${item.name}">Item title</div>
+            <div class="cart-info-detail" th:text="${item.description}">
+              Item description
+            </div>
+            <div class="cart-info-price">
+              Price:
+              <span th:if="${item?.price != null}"
+                    th:text="|$| + ${#numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')}">
+                               $000.00
+                           </span>
+              <span th:unless="${item?.price != null}">$0.00</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+    </div>
+
+
+  </div> </div> </body>
+</html>

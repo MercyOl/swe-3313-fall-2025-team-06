@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Schmendrick's Weaponry - Cart</title>
+
+    <style>
+        /* --- BODY --- */
+        body {
+            margin: 0;
+            font-family: "Segoe UI", sans-serif;
+            background-color: #f5f7fb;
+        }
+
+        /* --- HEADER --- */
+        .header {
+            background-color: #0b1f52;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 40px;
+            align-items: center;
+            font-size: 22px;
+        }
+        .logo { font-size: 26px; font-weight: bold; }
+        .logo span { font-size: 32px; }
+        .profile { display: flex; align-items: center; gap: 10px; font-size: 18px; }
+        .profile-img { width: 45px; height: 45px; background: #eee; border-radius: 50%; }
+
+        /* --- CART SECTION --- */
+        .cart-section {
+            padding: 40px;
+        }
+
+        .cart-title {
+            font-size: 28px;
+            font-weight: bold;
+            color: #0b1f52;
+            margin-bottom: 20px;
+        }
+
+        /* Cart item card */
+        .cart-item {
+            display: flex;
+            align-items: center;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            gap: 20px;
+        }
+
+        .cart-item img {
+            width: 120px;
+            height: 120px;
+            object-fit: contain;
+            border-radius: 6px;
+            background: #dfe3ec;
+        }
+
+        .item-info {
+            flex: 1;
+        }
+        .item-info h3 { margin: 0; font-size: 22px; }
+        .item-info p { margin: 5px 0; font-size: 16px; color: #333; }
+
+        /* Remove button styling */
+        .remove-btn {
+            background: #7d5ba6;
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        .remove-btn:hover { opacity: 0.9; }
+
+        /* Cart total styling */
+        .cart-total {
+            font-size: 22px;
+            font-weight: bold;
+            margin-top: 20px;
+            text-align: right;
+        }
+
+        /* Back and checkout buttons */
+        .back-btn, .checkout-btn {
+            margin-top: 20px;
+            background: #0b1f52;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .back-btn:hover, .checkout-btn:hover { opacity: 0.9; }
+    </style>
+</head>
+
+<body>
+<!-- --- HEADER: Logo + User Profile --- -->
+<div class="header">
+    <div class="logo"><span>Schmendrick's</span> Weaponry</div>
+    <div class="profile">
+        Name
+        <div class="profile-img"></div>
+    </div>
+</div>
+
+<!-- --- CART SECTION --- -->
+<div class="cart-section">
+    <!-- Cart page title -->
+    <div class="cart-title">Your Cart</div>
+
+    <!-- Message shown if cart is empty -->
+    <div th:if="${items.isEmpty()}">
+        Your cart is empty.
+    </div>
+
+    <!-- Each item in cart -->
+    <div th:each="item : ${items}" class="cart-item" th:attr="data-id=${item.id}">
+        <!-- Item image -->
+        <img th:src="@{${item.image}}" th:alt="${item.name}">
+        <!-- Item info: name, description, price -->
+        <div class="item-info">
+            <h3 th:text="${item.name}"></h3>
+            <p th:text="${item.description}"></p>
+            <p>Price: $<span th:text="${item.price}"></span></p>
+        </div>
+        <!-- Remove button calls JS function -->
+        <button class="remove-btn" th:onclick="'removeFromCart(' + ${item.id} + ')'">Remove</button>
+    </div>
+
+    <!-- Cart total -->
+    <div class="cart-total">
+        Total: $<span id="cartTotal" th:text="${cartTotal}">0.00</span>
+    </div>
+
+    <!-- Back and Checkout buttons -->
+    <div class="cart-actions">
+        <button class="back-btn" onclick="window.location.href='/inventory'">Back to Inventory</button>
+        <button class="checkout-btn" id="checkoutBtn" th:if="${!items.isEmpty()}" onclick="window.location.href='/checkout'">
+            Checkout
+        </button>
+    </div>
+</div>
+
+
+<script>
+    function removeFromCart(id) {
+        // Call server endpoint to remove item from cart
+        fetch(`/cart/remove/${id}`, { method: 'POST' })
+            .then(response => response.json())
+            .then(data => {
+                // Remove the item card from the page
+                const card = document.querySelector(`.cart-item[data-id='${id}']`);
+                if (card) card.remove();
+
+                // Update the total displayed
+                document.getElementById("cartTotal").textContent = data.total.toFixed(2);
+
+                // If cart is empty after removal
+                const remainingItems = document.querySelectorAll('.cart-item').length;
+                if (remainingItems === 0) {
+                    // Show empty message
+                    const cartSection = document.querySelector('.cart-section');
+                    cartSection.insertAdjacentHTML('beforeend', '<p>Your cart is empty.</p>');
+
+                    // Hide checkout button
+                    const checkoutBtn = document.getElementById('checkoutBtn');
+                    if (checkoutBtn) checkoutBtn.style.display = 'none';
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Failed to remove item.");
+            });
+    }
+</script>
+
+</body>
+</html>
+
+

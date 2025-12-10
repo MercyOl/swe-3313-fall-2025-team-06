@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<script>
+    // HTML CREATED WITH CHATGPT (SLIGHTLY MODIFIED)
+</script>
+
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${reportTitle} ?: 'Sales Report'"></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        /* BASE STYLES & FONT */
+        body { font-family: "Montserrat", sans-serif; margin: 0; background-color: #f5f7fb; color: #1f2640; }
+        .page-container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+
+        /* --- HEADER STYLES (MATCHES INVENTORY SCREEN) --- */
+        .header {
+            background-color: #0b1f52;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 40px;
+            align-items: center;
+            font-size: 22px;
+        }
+        .logo { font-size: 26px; font-weight: bold; }
+        .logo span { font-size: 32px; }
+        .profile {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 18px;
+        }
+        .profile-img { width: 45px; height: 45px; background: #eee; border-radius: 50%; }
+
+        /* ADMIN BUTTON STYLE (Used for 'Inventory' link on this page) */
+        .admin-btn {
+            background: #7d5ba6; /* Purple color from navbar */
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-left: 20px;
+        }
+        .admin-btn:hover { background: #6b4ca5; }
+
+        /* --- END HEADER STYLES --- */
+
+        /* SEARCH SECTION (From Inventory Page) - Simplified for Report */
+        .search-section {
+            background-color: #a1d7f5;
+            padding: 15px 40px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .search-container {
+            display: flex;
+            background: white;
+            border-radius: 6px;
+            padding: 5px 10px;
+            width: 60%;
+            align-items: center;
+        }
+        .search-container input {
+            width: 100%;
+            border: none;
+            padding: 8px;
+            font-size: 18px;
+            outline: none;
+        }
+        .cart { font-size: 20px; font-weight: bold; }
+
+        /* REPORT TITLE */
+        .report-title {
+            font-size: 30px;
+            font-weight: 700;
+            margin: 40px 0 20px;
+            text-align: center;
+            color: #0b1f52;
+        }
+
+        /* TABLE CONTAINER & STYLING */
+        .report-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 15px;
+        }
+
+        th {
+            background-color: #7d5ba6; /* Purple navbar color */
+            color: white;
+            padding: 12px 15px;
+            text-align: left;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        td {
+            border-bottom: 1px solid #eee;
+            padding: 12px 15px;
+        }
+
+        /* Zebra striping for readability */
+        tr:nth-child(even) {
+            background-color: #f7f7f7;
+        }
+
+        /* Highlight Revenue Column */
+        .revenue {
+            font-weight: 700;
+            color: #008000; /* Green for money */
+        }
+
+        /* Message Styling */
+        .message-box {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: #cc1e1e;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="header">
+    <div class="logo"><span>Schmendrick's</span> Weaponry</div>
+    <div class="profile">
+        <span th:text="${currentUser?.getUsername()} ?: 'Sales Admin'">Sales Admin</span>
+        <div class="profile-img"></div>
+        <button class="admin-btn" onclick="window.location.href='/inventory'">
+            Inventory
+        </button>
+    </div>
+</div>
+
+<div class="search-section">
+    <div class="search-container">
+        🔍
+        <input type="text" id="reportSearch" placeholder="Search orders, customers, or items">
+    </div>
+    <div class="cart">
+        Cart: <span th:text="${cartCount} ?: 0">0</span>
+        | Total: $<span th:text="${cartTotal} ?: 0.00">0.00</span>
+    </div>
+</div>
+
+<div class="page-container">
+    <h1 class="report-title" th:text="${reportTitle} ?: 'Monthly Sales Performance'">Monthly Sales Performance</h1>
+
+    <div sec:authorize="principal?.isAdmin">
+
+        <div class="report-card">
+            <table>
+                <thead>
+                <tr>
+                    <th style="width: 12%;">Order ID</th>
+                    <th style="width: 15%;">Order Date</th>
+                    <th style="width: 20%;">Customer Name</th>
+                    <th style="width: 10%;">Item Count</th>
+                    <th style="width: 15%;">Total Revenue</th>
+                    <th style="width: 28%;">Admin Notes</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="order : ${salesOrders}">
+                    <td th:text="${order.orderId}">ORD-1</td>
+                    <td th:text="${order.date}">2024-07-20</td>
+                    <td th:text="${order.getUserId()}">Schmendrick</td>
+                    <td>--</td>
+                    <td class="revenue"
+                        th:text="'$' + ${#numbers.formatDecimal(order.total, 1, 'COMMA', 2, 'POINT')}">$1,250.00</td>
+                    <td>N/A</td>
+                </tr>
+
+                <tr th:if="${#lists.isEmpty(salesOrders)}">
+                    <td colspan="6" style="text-align: center; color: #7d5ba6;">No sales orders found for this period.</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const searchBar = document.getElementById("reportSearch");
+        const table = document.querySelector(".report-card table tbody");
+        if (searchBar && table) {
+            const rows = table.getElementsByTagName("tr");
+
+            searchBar.addEventListener("input", function() {
+                const filter = searchBar.value.toLowerCase();
+
+                for (let i = 0; i < rows.length; i++) {
+                    let text = rows[i].textContent || rows[i].innerText;
+                    if (text.toLowerCase().indexOf(filter) > -1) {
+                        rows[i].style.display = "";
+                    } else {
+                        rows[i].style.display = "none";
+                    }
+                }
+            });
+        }
+    });
+</script>
+
+</body>
+</html>
