@@ -34,3 +34,10 @@ Welcome to the project repository for Team 06 – Schmendrick's Fools. Our team 
 
 ## Technical Design
 - The outline of our technical design for this project can be found [here](https://github.com/MercyOl/swe-3313-fall-2025-team-06/blob/main/technical-design/README.md)
+
+## Implementation
+- The documentation and final product of our implementation can be found [here]()
+
+## Final Presentation
+- PART 1: [Launch from terminal and run-through (user and admin)](https://www.loom.com/share/3ac42cdbb4994574b77d224b0772a3a1)
+- PART 2: [Marvel side-by-side]()
