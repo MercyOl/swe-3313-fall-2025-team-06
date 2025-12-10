@@ -26,7 +26,7 @@ public class InventoryService {
         loadItemsFromJson();
     }
 
-    private File inventoryDataFile = new File("src/main/resources/data/UserData.json");
+    private File inventoryDataFile = new File("src/main/resources/data/items.json");
 
     private void loadItemsFromJson() {
         try {
