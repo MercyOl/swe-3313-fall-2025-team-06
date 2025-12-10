@@ -53,10 +53,10 @@ public class CheckOutController {
     @GetMapping("/payment")
     public String showPayment(@RequestParam("shipping") String shipping, Model model) {
         ShippingOption selectedShipping = ShippingOption.valueOf(shipping);
-        List<Item> cartItems = cartService.getCartItems();
+        CartSummary cart = new CartSummary(cartService.getCurrentCart(), selectedShipping);
 
         model.addAttribute("shipping", selectedShipping);
-        model.addAttribute("cart", cartService.getCurrentCart());
+        model.addAttribute("cart", cart);
 
         return "payment"; // payment.html
     }

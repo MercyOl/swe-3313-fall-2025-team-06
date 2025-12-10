@@ -49,9 +49,7 @@ public class CartService {
 
     public ShoppingCart getCurrentCart() {
         int userId = userService.getCurrentUser().getUserId();
-        while (carts.size() <= userId) {
-            carts.add(new ShoppingCart(new ArrayList<>(), carts.size()));
-        }
+
         return carts.get(userId);
     }
 

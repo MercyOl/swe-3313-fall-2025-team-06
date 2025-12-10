@@ -244,33 +244,30 @@
       <!-- === Subtotal === -->
       <div class="summary-line">
         <span>Subtotal:</span>
-        <span th:if="${cart != null and cart.subtotal != null}"
-              th:text="'$' + #numbers.formatDecimal(cart.subtotal, 1, 'COMMA', 2, 'POINT')"></span>
-        <span th:unless="${cart != null and cart.subtotal != null}">$0.00</span>
+        <span th:if="${cart?.subtotal != null}"
+              th:text="|$$| + ${#numbers.formatDecimal(cart.subtotal, 1, 'COMMA', 2, 'POINT')}"></span>
+        <span th:unless="${cart?.subtotal != null}">$0.00</span>
       </div>
 
-      <!-- === Shipping === -->
       <div class="summary-line">
         <span>Estimated Shipping:</span>
-        <span th:if="${cart != null and cart.estimatedShipping != null}"
-              th:text="'$' + #numbers.formatDecimal(cart.estimatedShipping, 1, 'COMMA', 2, 'POINT')"></span>
-        <span th:unless="${cart != null and cart.estimatedShipping != null}">$0.00</span>
+        <span th:if="${cart?.estimatedShipping != null}"
+              th:text="|$$| + ${#numbers.formatDecimal(cart.estimatedShipping, 1, 'COMMA', 2, 'POINT')}"></span>
+        <span th:unless="${cart?.estimatedShipping != null}">$0.00</span>
       </div>
 
-      <!-- === Tax === -->
       <div class="summary-line">
         <span>Estimated Tax:</span>
-        <span th:if="${cart != null and cart.estimatedTax != null}"
-              th:text="'$' + #numbers.formatDecimal(cart.estimatedTax, 1, 'COMMA', 2, 'POINT')"></span>
-        <span th:unless="${cart != null and cart.estimatedTax != null}">$0.00</span>
+        <span th:if="${cart?.estimatedTax != null}"
+              th:text="|$$| + ${#numbers.formatDecimal(cart.estimatedTax, 1, 'COMMA', 2, 'POINT')}"></span>
+        <span th:unless="${cart?.estimatedTax != null}">$0.00</span>
       </div>
 
-      <!-- === Total === -->
       <div class="summary-line total">
         <span>Total:</span>
-        <span th:if="${cart != null and cart.total != null}"
-              th:text="'$' + #numbers.formatDecimal(cart.total, 1, 'COMMA', 2, 'POINT')"></span>
-        <span th:unless="${cart != null and cart.total != null}">$0.00</span>
+        <span th:if="${cart?.total != null}"
+              th:text="|$$| + ${#numbers.formatDecimal(cart.total, 1, 'COMMA', 2, 'POINT')}"></span>
+        <span th:unless="${cart?.total != null}">$0.00</span>
       </div>
 
       <!-- Items -->
