@@ -1,11 +1,9 @@
 package com.team_06.schmendricks_weaponry.model;
 
-
-import java.util.List;
 import java.math.BigDecimal;
+import java.util.List;
 
 public class CartSummary {
-
 
     private BigDecimal subtotal;
     private BigDecimal estimatedShipping;
@@ -13,17 +11,19 @@ public class CartSummary {
     private BigDecimal total;
     private ShoppingCart cart;
 
-
-    public CartSummary(ShoppingCart cart, BigDecimal estimatedShipping) {
+    public CartSummary(ShoppingCart cart, ShippingOption shipping) {
         this.cart = cart;
 
-        this.subtotal = new BigDecimal(0);
-        for(int i = 0; i < cart.getItems().size(); i++) {
-            this.subtotal = cart.getItems().get(i).getPrice();
-        }
+        // Calculate subtotal from cart items
+        this.subtotal = cart.getTotalPrice();
 
-        this.estimatedTax = subtotal.multiply(new BigDecimal(0.08));
-        this.estimatedShipping = estimatedShipping;
+        // Tax = 6% of subtotal
+        this.estimatedTax = subtotal.multiply(new BigDecimal("0.06"));
+
+        // Shipping cost
+        this.estimatedShipping = shipping.getCost();
+
+        // Total
         this.total = subtotal.add(estimatedShipping).add(estimatedTax);
     }
 
@@ -32,6 +32,5 @@ public class CartSummary {
     public BigDecimal getEstimatedShipping() { return estimatedShipping; }
     public BigDecimal getEstimatedTax() { return estimatedTax; }
     public BigDecimal getTotal() { return total; }
-    public ShoppingCart getItems() { return cart; }
+    public ShoppingCart getCart() { return cart; }
 }
-

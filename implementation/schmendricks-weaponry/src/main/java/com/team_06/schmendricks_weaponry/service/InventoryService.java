@@ -20,7 +20,6 @@ public class InventoryService {
     // List of all items in inventory
     private final List<Item> items = new ArrayList<>();
 
-
     public InventoryService() {
         loadItemsFromJson();
     }
@@ -64,5 +63,13 @@ public class InventoryService {
      */
     public Item getItemById(int id) {
         return items.stream().filter(i -> i.getId() == id).findFirst().orElse(null);
+    }
+
+
+    public void setItemAvailable(int id, boolean available) {
+        Item item = getItemById(id);
+        if (item != null) {
+            item.setAvailable(available);
+        }
     }
 }

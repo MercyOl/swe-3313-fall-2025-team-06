@@ -1,56 +1,50 @@
 package com.team_06.schmendricks_weaponry.controller;
 
-import com.team_06.schmendricks_weaponry.model.CartItem;
 import com.team_06.schmendricks_weaponry.model.CartSummary;
-
-import java.math.BigDecimal;
-import java.util.List;
-
 import com.team_06.schmendricks_weaponry.model.Item;
+import com.team_06.schmendricks_weaponry.model.ShippingOption;
 import com.team_06.schmendricks_weaponry.model.ShoppingCart;
 import com.team_06.schmendricks_weaponry.service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 @Controller
 public class CheckOutController {
 
     @Autowired
-    public CartService cartService;
+    private CartService cartService;
+
+    private ShoppingCart buildCart() {
+        List<Item> items = cartService.getCartItems();
+        return new ShoppingCart(items, 0); // user ID not needed for display
+    }
 
     @GetMapping("/checkout")
-    public String showCheckout(Model model) {
-        CartSummary cart = new CartSummary(cartService.getCurrentShoppingCart(), new BigDecimal(15.00));
+    public String showCheckout(
+            @RequestParam(value = "shipping", required = false, defaultValue = "GROUND") ShippingOption selectedShipping,
+            Model model
+    ) {
+        ShoppingCart cart = buildCart();
+        CartSummary cartSummary = new CartSummary(cart, selectedShipping);
 
-        model.addAttribute("cart", cart);
-
+        model.addAttribute("cart", cartSummary);
+        model.addAttribute("selectedShipping", selectedShipping);
         return "checkout";
     }
 
-
-    @GetMapping("/payment")
-    public String showPaymentPage(Model model) {
-        CartSummary cart = new CartSummary(cartService.getCurrentShoppingCart(), new BigDecimal(15.00));
-
-        model.addAttribute("cart", cart);
-
-
-        return "payment"; // this should match your payment.html page name
+    @PostMapping("/checkout/remove")
+    public String removeItem(@RequestParam("itemId") int itemId) {
+        cartService.removeItem(itemId);
+        return "redirect:/checkout";
     }
-    @GetMapping("/confirmation")
-    public String showConfirmation(Model model) {
-        CartSummary cart = new CartSummary(cartService.getCurrentShoppingCart(), new BigDecimal(15.00));
 
-        model.addAttribute("cart", cart);
-        model.addAttribute("orderNumber", "SW-000123");
-        model.addAttribute("customerEmail", "hero@example.com");
-        model.addAttribute("estimatedDelivery", "Wednesday, Oct 23 – Friday, Oct 25");
-        model.addAttribute("shippingAddress", "123 Hero's Way, Kennesaw, GA");
-
-
-        return "confirmation";
+    @PostMapping("/payment")
+    public String continueToPayment(@RequestParam("shipping") ShippingOption selectedShipping) {
+        // Save selected shipping to session/cart if needed
+        return "redirect:/payment?shipping=" + selectedShipping.name();
     }
 }

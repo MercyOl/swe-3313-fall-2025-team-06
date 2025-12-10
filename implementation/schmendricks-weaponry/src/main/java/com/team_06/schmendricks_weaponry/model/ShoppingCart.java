@@ -78,7 +78,7 @@ public class ShoppingCart {
     }
 
     public void setItems(List<Item> items){
-        items = items;
+        this.items = items;
     }
 }
 

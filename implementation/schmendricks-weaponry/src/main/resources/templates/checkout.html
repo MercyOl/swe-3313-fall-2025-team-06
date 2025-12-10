@@ -5,338 +5,40 @@
     <title>Checkout</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
-
     <style>
-        :root {
-          --purple: #6b4ca5;
-          --blue-light: #8fd2f3;
-          --border: #d4d8e0;
-          --text-main: #1f2640;
-          --text-muted: #6b7385;
-          --bg-page: #f2f6fb;
-          --card-bg: #ffffff;
-        }
-        * { box-sizing: border-box; }
-        body {
-          margin: 0;
-          font-family: "Montserrat", system-ui, sans-serif;
-          background: var(--bg-page);
-          color: var(--text-main);
-        }
-        a { color: inherit; text-decoration: none; }
-
-
-        .top-bar { background: #0d1b46; padding: 10px 0; }
-        .top-bar-inner {
-          max-width: 1200px;
-          margin: 0 ;
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          padding: 0;
-        }
-        .logo { font-weight: 600; font-size: 20px; }
-
-
-        .cart-link {
-          display: flex;
-          align-items: center;
-          gap: 4px;
-          font-size: 14px;
-          font-weight: 500;
-        }
-
-
-        .checkout-header {
-          background: var(--purple);
-          color: #ffffff;
-          padding: 18px 0;
-          text-align: center;
-          font-size: 32px;
-          font-weight: 600;
-          letter-spacing: 0.04em;
-        }
-
-
-        .page {
-          max-width: 1200px;
-          margin: 0 auto;
-          padding: 16px;
-        }
-        .back-link {
-          margin-bottom: 12px;
-          font-size: 14px;
-          font-weight: 500;
-        }
-
-
-        .checkout-layout {
-          display: grid;
-          grid-template-columns: minmax(0, 2fr) minmax(0, 1.7fr);
-          gap: 18px;
-        }
-
-
-        .card {
-          background: var(--card-bg);
-          border: 1px solid var(--border);
-          border-radius: 4px;
-          padding: 16px 18px 20px;
-        }
-        .card-header {
-          display: flex;
-          align-items: baseline;
-          gap: 8px;
-          margin-bottom: 12px;
-          font-size: 18px;
-          font-weight: 600;
-        }
-
-
-        .delivery-toggle {
-          display: grid;
-          grid-template-columns: repeat(2, 1fr);
-          border-radius: 4px;
-          border: 1px solid var(--border);
-          overflow: hidden;
-          margin-bottom: 16px;
-        }
-        .delivery-toggle button {
-          border: none;
-          padding: 10px 0;
-          font-size: 16px;
-          font-weight: 600;
-          cursor: pointer;
-          background: #ffffff;
-        }
-        .delivery-toggle button.active {
-          background: var(--blue-light);
-        }
-
-
-        .form-grid {
-          display: grid;
-          grid-template-columns: repeat(2, minmax(0, 1fr));
-          gap: 12px 16px;
-        }
-        .form-group {
-          display: flex;
-          flex-direction: column;
-          font-size: 13px;
-        }
-        .form-group.full-width { grid-column: 1 / -1; }
-
-
-        .form-group label { margin-bottom: 4px; font-weight: 500; }
-        .form-group label span.required { color: #cc1e1e; }
-
-
-        .form-group input {
-          padding: 8px 10px;
-          border-radius: 3px;
-          border: 1px solid var(--border);
-          font-size: 14px;
-          outline: none;
-        }
-        .form-group input:focus { border-color: var(--purple); }
-
-
-        .card-top-row {
-          display: flex;
-          justify-content: space-between;
-          align-items: baseline;
-          margin-bottom: 10px;
-        }
-        .card-top-row h2 {
-          margin: 0;
-          font-size: 18px;
-          font-weight: 600;
-        }
-        .card-top-row a {
-          font-size: 13px;
-          text-decoration: underline;
-        }
-
-
-        .summary-line {
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 6px;
-          font-size: 15px;
-        }
-
-
-        .summary-line.total {
-          margin-top: 8px;
-          font-weight: 700;
-          font-size: 18px;
-          border-top: 1px solid var(--border);
-          padding-top: 8px;
-        }
-
-
-        .summary-amount { font-family: "Courier New", monospace; }
-
-
-        .cart-items {
-          margin-top: 18px;
-          border-top: 1px solid var(--border);
-          padding-top: 16px;
-        }
-        .cart-item {
-          display: grid;
-          grid-template-columns: 80px minmax(0, 1fr);
-          gap: 10px;
-          padding: 10px 0;
-          border-bottom: 1px solid var(--border);
-        }
-        .cart-thumb {
-          width: 80px;
-          height: 80px;
-          border-radius: 3px;
-          background: #e2e6f0;
-        }
-        .cart-info-title { font-weight: 600; margin-bottom: 4px; }
-        .cart-info-detail { font-size: 13px; color: var(--text-muted); margin-bottom: 2px; }
-        .cart-info-price { font-size: 14px; font-weight: 500; margin-top: 4px; }
-
-
-        @media (max-width: 900px) {
-          .checkout-layout { grid-template-columns: 1fr; }
-        }
-        @media (max-width: 600px) {
-          .card { padding: 14px; }
-          .form-grid { grid-template-columns: 1fr; }
-        }
-
-
-        .checkout-button-wrapper {
-           margin-top: 24px;
-           text-align: center;
-     }
-
-
-         .checkout-btn {
-           background: #4aa9ff;
-            color: white;
-            border: none;
-            padding: 16px 28px;
-            font-size: 20px;
-            font-weight: 700;
-            border-radius: 8px;
-            cursor: pointer;
-            width: 85%;
-            transition: 0.2s ease;
-     }
-
-
-          .checkout-btn:hover {
-            background: #238be6;
-     }
-
-
-          .checkout-btn:active {
-            transform: scale(0.96);
-     }
-          .logo {
-            display: flex;
-            align-items: center;
-     }
-
-
-          .logo-img {
-            height: 48px;   /* Adjust this to fit your header cleanly */
-            width: auto;
-            display: block;
-     }
-
-
-          .sub-nav {
-            background: #7b59b4;
-            padding: 10px 20px;
-            display: flex;
-            gap: 25px;
-            align-items: center;
-     }
-          .checkout-header {
-            background: var(--purple);
-            color: #ffffff;
-            padding: 18px 24px;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-     }
-
-
-          .checkout-home {
-            font-size: 18px;
-            font-weight: 500;
-            text-decoration: none;
-            color: #ffffff;
-            opacity: 0.9;
-            transition: 0.2s ease;
-     }
-
-
-          .checkout-home:hover {
-            opacity: 1;
-            text-decoration: underline;
-     }
-
-
-          .checkout-title {
-            flex: 1;
-            text-align: center;
-            font-size: 32px;
-            font-weight: 600;
-            letter-spacing: 0.04em;
-     }
-
-
-
-
-
-
+        body { font-family: "Montserrat", sans-serif; margin: 0; background: #f2f6fb; color: #1f2640; }
+        .checkout-header { background: #6b4ca5; color: #fff; padding: 18px; display: flex; align-items: center; gap: 24px; }
+        .checkout-home { color: #fff; text-decoration: none; font-size: 18px; opacity: 0.9; }
+        .checkout-home:hover { opacity: 1; text-decoration: underline; }
+        .checkout-title { flex: 1; text-align: center; font-size: 32px; font-weight: 600; }
+        .page { max-width: 1200px; margin: 0 auto; padding: 16px; }
+        .checkout-layout { display: grid; grid-template-columns: 2fr 1.7fr; gap: 18px; }
+        .card { background: #fff; border: 1px solid #d4d8e0; border-radius: 4px; padding: 16px; }
+        .summary-line { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 15px; }
+        .summary-line.total { margin-top: 8px; font-weight: 700; font-size: 18px; border-top: 1px solid #d4d8e0; padding-top: 8px; }
+        .cart-items { margin-top: 18px; border-top: 1px solid #d4d8e0; padding-top: 16px; }
+        .cart-item { display: grid; grid-template-columns: 80px minmax(0,1fr); gap: 10px; padding: 10px 0; border-bottom: 1px solid #d4d8e0; position: relative; }
+        .cart-thumb { width: 80px; height: 80px; border-radius: 3px; background: #e2e6f0; }
+        .remove-btn { cursor: pointer; color: #cc1e1e; font-weight: 600; margin-top: 6px; display: inline-block; }
+        .checkout-button-wrapper { margin-top: 24px; text-align: center; }
+        .checkout-btn { background: #4aa9ff; color: white; border: none; padding: 16px 28px; font-size: 20px; font-weight: 700; border-radius: 8px; cursor: pointer; width: 85%; transition: 0.2s ease; }
+        .checkout-btn:hover { background: #238be6; }
     </style>
 </head>
 <body>
-
-
-<div class="top-bar">
-    <div class="top-bar-inner">
-        <div class="logo">
-            <img
-                    th:src="@{/images/img.png}"
-                    src="/images/img.png"
-                    alt="Schmendrick's Weaponry"
-                    class="logo-img"
-            >
-        </div>
-    </div>
-</div>
-
-
-
 
 <div class="checkout-header">
     <a href="/" class="checkout-home">Home</a>
     <span class="checkout-title">Checkout</span>
 </div>
 
-
 <div class="page">
-
-
     <div class="checkout-layout">
-        <!-- LEFT -->
+        <!-- LEFT: Customer Info -->
         <div class="card">
             <div class="card-header">
                 <span>Secure Checkout</span>
             </div>
-
-
-
 
             <form class="form-grid">
                 <div class="form-group">
@@ -372,80 +74,146 @@
                     <input type="text" placeholder="e.g. 30043"/>
                 </div>
 
-
+                <!-- Shipping Method -->
+                <div class="form-group full-width">
+                    <label for="shipping">Shipping Method:</label>
+                    <select name="shipping" id="shipping">
+                        <option value="GROUND">Ground – Free</option>
+                        <option value="THREE_DAY">3-Day – $19</option>
+                        <option value="OVERNIGHT">Overnight – $29</option>
+                    </select>
+                </div>
             </form>
         </div>
 
-
-        <!-- RIGHT -->
+        <!-- RIGHT: Cart Summary -->
         <div class="card">
             <div class="card-top-row">
                 <h2>In your Cart</h2>
                 <a href="#">Edit</a>
             </div>
 
-
             <div class="summary-line">
                 <span>Subtotal:</span>
-                <span class="summary-amount"
-                      th:text="${#numbers.formatDecimal(cart.subtotal, 1, 'COMMA', 2, 'POINT')}">
-         $000.00
-       </span>
+                <span class="summary-amount" id="subtotal">$0.00</span>
             </div>
             <div class="summary-line">
                 <span>Estimated Shipping:</span>
-                <span class="summary-amount"
-                      th:text="${#numbers.formatDecimal(cart.estimatedShipping, 1, 'COMMA', 2, 'POINT')}">
-         $000.00
-       </span>
+                <span class="summary-amount" id="shippingCost">$0.00</span>
             </div>
             <div class="summary-line">
                 <span>Estimated Tax:</span>
-                <span class="summary-amount"
-                      th:text="${#numbers.formatDecimal(cart.estimatedTax, 1, 'COMMA', 2, 'POINT')}">
-         $000.00
-       </span>
+                <span class="summary-amount" id="tax">$0.00</span>
             </div>
-
-
             <div class="summary-line total">
                 <span>Total</span>
-                <span class="summary-amount"
-                      th:text="${#numbers.formatDecimal(cart.total, 1, 'COMMA', 2, 'POINT')}">
-         $000.00
-       </span>
+                <span class="summary-amount" id="total">$0.00</span>
             </div>
 
-
-            <div class="cart-items">
-                <div th:each="item : ${cart.getCartItems()}" class="cart-item">
+            <div class="cart-items" id="cartItems">
+                <!-- Example cart items, each must have a unique data-id and price -->
+                <div class="cart-item" data-id="1" data-price="49.99">
                     <div class="cart-thumb"></div>
                     <div>
-                        <div class="cart-info-title" th:text="${item.name}">Lorem ipsum dolor sit</div>
-                        <div class="cart-info-detail" th:text="${item.description}">
-                            Delivered WeekDay, Month Day
-                        </div>
-                        <div class="cart-info-price">
-                            Price:
-                            <span th:text="${#numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')}">
-               $000.00
-             </span>
-                        </div>
+                        <div class="cart-info-title">Steel Longsword</div>
+                        <div class="cart-info-detail">A finely crafted longsword with perfect balance.</div>
+                        <div class="cart-info-price">Price: $49.99</div>
+                        <div class="remove-btn">Remove</div>
+                    </div>
+                </div>
+                <div class="cart-item" data-id="2" data-price="29.99">
+                    <div class="cart-thumb"></div>
+                    <div>
+                        <div class="cart-info-title">Iron Shield</div>
+                        <div class="cart-info-detail">Sturdy shield for defense.</div>
+                        <div class="cart-info-price">Price: $29.99</div>
+                        <div class="remove-btn">Remove</div>
                     </div>
                 </div>
             </div>
-            <!-- CHECKOUT BUTTON -->
+
+            <!-- Payment form -->
             <div class="checkout-button-wrapper">
-                <form th:action="@{/payment}" method="get">
-                    <button type="submit" class="checkout-btn">
-                        Continue to Payment
-                    </button>
+                <form th:action="@{/payment}" method="post" id="paymentForm">
+                    <input type="hidden" name="shipping" id="shippingInput" value="GROUND">
+                    <div id="cartInputs"></div>
+                    <button type="submit" class="checkout-btn">Continue to Payment</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
 
+<script>
+    const shippingCosts = { "GROUND": 0, "THREE_DAY": 19, "OVERNIGHT": 29 };
+    const taxRate = 0.06;
+
+    const shippingSelect = document.getElementById('shipping');
+    const shippingInput = document.getElementById('shippingInput');
+    const subtotalEl = document.getElementById('subtotal');
+    const shippingEl = document.getElementById('shippingCost');
+    const taxEl = document.getElementById('tax');
+    const totalEl = document.getElementById('total');
+    const cartItemsEl = document.getElementById('cartItems');
+    const cartInputsEl = document.getElementById('cartInputs');
+
+    function formatCurrency(amount) { return '$' + amount.toFixed(2); }
+
+    function calculateSubtotal() {
+        let subtotal = 0;
+        cartItemsEl.querySelectorAll('.cart-item').forEach(item => {
+            subtotal += parseFloat(item.getAttribute('data-price')) || 0;
+        });
+        return subtotal;
+    }
+
+    function updateTotals() {
+        let subtotal = calculateSubtotal();
+        let shipping = shippingCosts[shippingSelect.value];
+        let tax = subtotal * taxRate;
+        let total = subtotal + shipping + tax;
+
+        subtotalEl.textContent = formatCurrency(subtotal);
+        shippingEl.textContent = formatCurrency(shipping);
+        taxEl.textContent = formatCurrency(tax);
+        totalEl.textContent = formatCurrency(total);
+
+        // Update hidden shipping input
+        shippingInput.value = shippingSelect.value;
+    }
+
+    function updateCartInputs() {
+        cartInputsEl.innerHTML = '';
+        cartItemsEl.querySelectorAll('.cart-item').forEach((item, index) => {
+            const itemId = item.getAttribute('data-id');
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = `cartItems[${index}].id`;
+            input.value = itemId;
+            cartInputsEl.appendChild(input);
+        });
+    }
+
+    // Remove item
+    cartItemsEl.addEventListener('click', function(e) {
+        if (e.target.classList.contains('remove-btn')) {
+            const item = e.target.closest('.cart-item');
+            if (item) item.remove();
+            updateTotals();
+            updateCartInputs();
+        }
+    });
+
+    // Shipping change
+    shippingSelect.addEventListener('change', () => {
+        updateTotals();
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        updateTotals();
+        updateCartInputs();
+    });
+</script>
 
 </body>
 </html>

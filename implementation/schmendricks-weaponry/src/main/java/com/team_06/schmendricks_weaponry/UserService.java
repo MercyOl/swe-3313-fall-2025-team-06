@@ -11,8 +11,6 @@ import org.springframework.web.context.annotation.SessionScope;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Optional;
-
 
 @Service
 @SessionScope
@@ -26,38 +24,39 @@ public class UserService {
 
     private User currentUser = new User();
 
-    public ArrayList<User> loadUsers(){
+    // Load all users from JSON
+    public ArrayList<User> loadUsers() {
         try {
             return mapper.readValue(userDataFile, new TypeReference<ArrayList<User>>() { } );
-        }catch(Exception e){
+        } catch(Exception e) {
             System.out.print(e.getMessage());
-
-            //return an empty list of Users
-            return new ArrayList<User>();
+            return new ArrayList<>();
         }
     }
 
-    public void saveUsers(ArrayList<User> userList) throws IOException{
+    // Save all users to JSON
+    public void saveUsers(ArrayList<User> userList) throws IOException {
         mapper.writerWithDefaultPrettyPrinter().writeValue(userDataFile, userList);
     }
 
-    public void addUser(User newUser) throws IOException{
+    // Add a new user
+    public void addUser(User newUser) throws IOException {
         ArrayList<User> userList = loadUsers();
 
-        // Set the new user's ID before adding to the list
+        // Set the new user's ID before adding
         newUser.setUserId(userList.size());
 
         userList.add(newUser);
         saveUsers(userList);
-
-        cartService.createCart();
     }
 
-    public void setCurrentUser(User u){
+    // Set the currently logged-in user
+    public void setCurrentUser(User u) {
         currentUser = u;
     }
 
-    public User getCurrentUser(){
+    // Get the currently logged-in user
+    public User getCurrentUser() {
         return currentUser;
     }
 }
