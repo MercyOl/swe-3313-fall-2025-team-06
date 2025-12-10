@@ -111,6 +111,5 @@ Or reload Maven in IntelliJ.
 
 Fix:
 
-```
 install Java 23 [here](https://www.oracle.com/java/technologies/javase/jdk23-archive-downloads.html?utm_source=chatgpt.com)
-```
+
