@@ -3,6 +3,8 @@ package com.team_06.schmendricks_weaponry;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
+import com.team_06.schmendricks_weaponry.service.CartService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
@@ -15,6 +17,9 @@ import java.util.Optional;
 @Service
 @SessionScope
 public class UserService {
+
+    @Autowired
+    private CartService cartService;
 
     private ObjectMapper mapper = new ObjectMapper();
     private File userDataFile = new File("src/main/resources/data/UserData.json");
@@ -44,6 +49,8 @@ public class UserService {
 
         userList.add(newUser);
         saveUsers(userList);
+
+        cartService.createCart();
     }
 
     public void setCurrentUser(User u){
