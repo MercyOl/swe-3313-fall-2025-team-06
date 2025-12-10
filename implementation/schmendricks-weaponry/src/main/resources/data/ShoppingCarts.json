@@ -41,6 +41,20 @@
     "price" : 40.00,
     "available" : true,
     "image" : "/images/Shortsword_icon.png"
+  }, {
+    "id" : 1,
+    "name" : "Knife",
+    "description" : "Short, cheap blade. Good as a sidearm.",
+    "price" : 10.00,
+    "available" : false,
+    "image" : "/images/Knife_icon.png"
+  }, {
+    "id" : 2,
+    "name" : "Shortsword",
+    "description" : "A lightweight, versatile sword.",
+    "price" : 40.00,
+    "available" : true,
+    "image" : "/images/Shortsword_icon.png"
   } ],
   "cartId" : 0
 } ]

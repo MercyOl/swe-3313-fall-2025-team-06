@@ -42,9 +42,24 @@ public class CheckOutController {
         return "redirect:/checkout";
     }
 
+    // Form submission
     @PostMapping("/payment")
-    public String continueToPayment(@RequestParam("shipping") ShippingOption selectedShipping) {
-        // Save selected shipping to session/cart if needed
-        return "redirect:/payment?shipping=" + selectedShipping.name();
+    public String continueToPayment(@RequestParam("shipping") String shipping) {
+        // do any session/cart updates here
+        return "redirect:/payment?shipping=" + shipping; // redirect to GET
     }
+
+    // Page display
+    @GetMapping("/payment")
+    public String showPayment(@RequestParam("shipping") String shipping, Model model) {
+        ShippingOption selectedShipping = ShippingOption.valueOf(shipping);
+        List<Item> cartItems = cartService.getCartItems();
+
+        model.addAttribute("shipping", selectedShipping);
+        model.addAttribute("cart", cartService.getCurrentCart());
+
+        return "payment"; // payment.html
+    }
+
+
 }

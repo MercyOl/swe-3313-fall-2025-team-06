@@ -6,7 +6,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
-
   <style>
     :root {
       --purple: #6b4ca5;
@@ -24,19 +23,17 @@
       background: var(--bg-page);
       color: var(--text-main);
     }
-    a { color: inherit; text-decoration: none; }
 
+    a { color: inherit; text-decoration: none; }
 
     .top-bar { background: #0d1b46; padding: 10px 0; }
     .top-bar-inner {
       max-width: 1200px;
-      margin: 0 ;
+      margin: 0 auto;
       display: flex;
       align-items: center;
-      padding: 0 ;
     }
     .logo-img { height: 48px; width: auto; }
-
 
     .checkout-header {
       background: var(--purple);
@@ -60,13 +57,11 @@
       letter-spacing: 0.04em;
     }
 
-
     .page {
       max-width: 1200px;
       margin: 0 auto;
       padding: 16px;
     }
-
 
     .back-link {
       margin-bottom: 12px;
@@ -77,14 +72,11 @@
       color: var(--text-main);
     }
 
-
-    /* Layout: payment left + summary right */
     .checkout-layout {
       display: grid;
       grid-template-columns: minmax(0, 2fr) minmax(0, 1.7fr);
       gap: 18px;
     }
-
 
     .card {
       background: var(--card-bg);
@@ -101,7 +93,6 @@
       font-weight: 600;
     }
 
-
     .form-grid {
       display: grid;
       grid-template-columns: repeat(2, 1fr);
@@ -110,7 +101,6 @@
     .form-group { display: flex; flex-direction: column; font-size: 13px; }
     .form-group.full-width { grid-column: 1 / -1; }
 
-
     .form-group label { margin-bottom: 4px; font-weight: 500; }
     .form-group input {
       padding: 8px 10px;
@@ -118,7 +108,6 @@
       border-radius: 3px;
       font-size: 14px;
     }
-
 
     .checkout-button-wrapper { text-align: center; margin-top: 24px; }
     .checkout-btn {
@@ -136,7 +125,6 @@
     .checkout-btn:hover { background: #238be6; }
     .checkout-btn:active { transform: scale(0.96); }
 
-
     .summary-line {
       display: flex;
       justify-content: space-between;
@@ -151,13 +139,11 @@
       font-weight: 700;
     }
 
-
     .cart-items {
       margin-top: 18px;
       padding-top: 16px;
       border-top: 1px solid var(--border);
     }
-
 
     .cart-item {
       display: grid;
@@ -176,7 +162,6 @@
     .cart-info-detail { font-size: 13px; color: var(--text-muted); margin-bottom: 2px; }
     .cart-info-price { font-size: 14px; font-weight: 500; margin-top: 4px; }
 
-
     @media (max-width: 900px) {
       .checkout-layout { grid-template-columns: 1fr; }
     }
@@ -187,9 +172,7 @@
   </style>
 </head>
 
-
 <body>
-
 
 <div class="top-bar">
   <div class="top-bar-inner">
@@ -198,25 +181,18 @@
   </div>
 </div>
 
-
 <div class="checkout-header">
   <a href="/" class="checkout-home">Home</a>
   <span class="checkout-title">Payment</span>
 </div>
 
-
 <div class="page">
 
-
-  <!-- 🔙 Back to delivery / checkout -->
   <div class="back-link">
     <a th:href="@{/checkout}">&larr; Back to Checkout</a>
   </div>
 
-
-  <!-- Layout: left payment, right summary -->
   <div class="checkout-layout">
-
 
     <!-- LEFT: PAYMENT FORM -->
     <div class="card">
@@ -225,35 +201,30 @@
         <img th:src="@{/images/payment-logos.png}"
              src="/images/payment-logos.png"
              alt="Accepted cards"
-             style="height:24px; width:auto;">
+             style="height:24px;">
       </div>
-
 
       <form class="form-grid">
         <div class="form-group full-width">
-          <label>Card Number<span class="required">*</span></label>
+          <label>Card Number</label>
           <input type="text" placeholder="1234 5678 9012 3456" maxlength="19">
         </div>
 
-
         <div class="form-group">
-          <label>Expiration (MM/YY)<span class="required">*</span></label>
+          <label>Expiration (MM/YY)</label>
           <input type="text" placeholder="MM/YY" maxlength="5">
         </div>
 
-
         <div class="form-group">
-          <label>Security Code<span class="required">*</span></label>
+          <label>Security Code</label>
           <input type="text" placeholder="3 digits" maxlength="4">
         </div>
 
-
         <div class="form-group full-width">
-          <label>Name on Card<span class="required">*</span></label>
+          <label>Name on Card</label>
           <input type="text" placeholder="e.g. Jake Burton Carpenter">
         </div>
       </form>
-
 
       <div class="checkout-button-wrapper">
         <form th:action="@{/confirmation}" method="get">
@@ -264,71 +235,69 @@
       </div>
     </div>
 
-
-    <!-- RIGHT: ORDER SUMMARY -->
+    <!-- RIGHT: SUMMARY -->
     <div class="card">
       <div class="card-header">
         <span>Order Summary</span>
       </div>
 
-
+      <!-- === Subtotal === -->
       <div class="summary-line">
         <span>Subtotal:</span>
-        <span th:text="${#numbers.formatDecimal(cart.subtotal, 1, 'COMMA', 2, 'POINT')}">
-                   $000.00
-               </span>
+        <span th:if="${cart != null and cart.subtotal != null}"
+              th:text="'$' + #numbers.formatDecimal(cart.subtotal, 1, 'COMMA', 2, 'POINT')"></span>
+        <span th:unless="${cart != null and cart.subtotal != null}">$0.00</span>
       </div>
 
-
+      <!-- === Shipping === -->
       <div class="summary-line">
         <span>Estimated Shipping:</span>
-        <span th:text="${#numbers.formatDecimal(cart.estimatedShipping, 1, 'COMMA', 2, 'POINT')}">
-                   $000.00
-               </span>
+        <span th:if="${cart != null and cart.estimatedShipping != null}"
+              th:text="'$' + #numbers.formatDecimal(cart.estimatedShipping, 1, 'COMMA', 2, 'POINT')"></span>
+        <span th:unless="${cart != null and cart.estimatedShipping != null}">$0.00</span>
       </div>
 
-
+      <!-- === Tax === -->
       <div class="summary-line">
         <span>Estimated Tax:</span>
-        <span th:text="${#numbers.formatDecimal(cart.estimatedTax, 1, 'COMMA', 2, 'POINT')}">
-                   $000.00
-               </span>
+        <span th:if="${cart != null and cart.estimatedTax != null}"
+              th:text="'$' + #numbers.formatDecimal(cart.estimatedTax, 1, 'COMMA', 2, 'POINT')"></span>
+        <span th:unless="${cart != null and cart.estimatedTax != null}">$0.00</span>
       </div>
 
-
+      <!-- === Total === -->
       <div class="summary-line total">
         <span>Total:</span>
-        <span th:text="${#numbers.formatDecimal(cart.total, 1, 'COMMA', 2, 'POINT')}">
-                   $000.00
-               </span>
+        <span th:if="${cart != null and cart.total != null}"
+              th:text="'$' + #numbers.formatDecimal(cart.total, 1, 'COMMA', 2, 'POINT')"></span>
+        <span th:unless="${cart != null and cart.total != null}">$0.00</span>
       </div>
 
-
+      <!-- Items -->
       <div class="cart-items">
-        <div th:each="item : ${cart.getCartItems()}" class="cart-item">
+        <div th:each="item : ${cart != null ? cart.cartItems : null}" class="cart-item">
           <div class="cart-thumb"></div>
           <div>
             <div class="cart-info-title" th:text="${item.name}">Item title</div>
-            <div class="cart-info-detail" th:text="${item.description}">
-              Item description
-            </div>
+            <div class="cart-info-detail" th:text="${item.description}">Item description</div>
+
             <div class="cart-info-price">
               Price:
-              <span th:text="${#numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')}">
-                               $000.00
-                           </span>
+              <span th:text="'$' + #numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')">
+                $0.00
+              </span>
             </div>
           </div>
         </div>
       </div>
 
-
     </div>
 
-
-  </div> <!-- /.checkout-layout -->
-</div> <!-- /.page -->
-
+  </div>
+</div>
 
 </body>
 </html>
+
+
+
