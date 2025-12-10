@@ -5,13 +5,14 @@
     <title>Schmendrick's Weaponry</title>
 
     <style>
+        /* BODY */
         body {
             margin: 0;
             font-family: "Segoe UI", sans-serif;
             background-color: #f5f7fb;
         }
 
-        /*HEADER*/
+        /* HEADER: Logo + User Profile */
         .header {
             background-color: #0b1f52;
             color: white;
@@ -26,7 +27,7 @@
         .profile { display: flex; align-items: center; gap: 10px; font-size: 18px; }
         .profile-img { width: 45px; height: 45px; background: #eee; border-radius: 50%; }
 
-        /* SEARCH SECTION*/
+        /* SEARCH SECTION: Search bar + Cart info */
         .search-section {
             background-color: #a1d7f5;
             padding: 15px 40px;
@@ -62,7 +63,7 @@
         }
         .navbar div:hover { text-decoration: underline; cursor: pointer; }
 
-        /*SECTION TITLE */
+        /* SECTION TITLE */
         .section-title {
             font-size: 26px;
             font-weight: bold;
@@ -70,37 +71,38 @@
             color: #0b1f52;
         }
 
-        /*  ITEM GRID */
+        /* ITEM GRID */
         .item-grid {
-            display: flex;               /* use flexbox for wrapping cards */
-            flex-wrap: wrap;             /* wrap cards to new lines */
-            gap: 30px;                   /* space between cards */
-            padding: 0 40px 40px;        /* padding around grid */
-            justify-content: flex-start; /* left-align cards */
+            display: flex;
+            flex-wrap: wrap;
+            gap: 30px;
+            padding: 0 40px 40px;
+            justify-content: flex-start;
         }
 
+        /* ITEM CARD */
         .item-card {
             background-color: white;
-            width: 320px;                /* fixed card width */
+            width: 320px;
             padding: 15px;
             border-radius: 8px;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
             display: flex;
-            flex-direction: column;      /* stack image + info vertically */
+            flex-direction: column;
             align-items: center;
         }
 
-        /* ITEM IMAGE  */
+        /* ITEM IMAGE */
         .item-card img {
             width: 300px;
-            height: auto;               /* maintain aspect ratio */
-            max-height: 300px;          /* prevent image from being too tall */
-            object-fit: contain;        /* avoid cropping */
+            height: auto;
+            max-height: 300px;
+            object-fit: contain;
             border-radius: 6px;
             background: #dfe3ec;
         }
 
-        /* ITEM INFO  */
+        /* ITEM INFO */
         .item-card h3 {
             font-size: 22px;
             font-weight: 600;
@@ -114,7 +116,7 @@
             text-align: center;
         }
 
-        /*  ADD TO CART BUTTON */
+        /* ADD TO CART BUTTON */
         .add-btn {
             width: 80%;
             background: #0b1f52;
@@ -127,7 +129,19 @@
         }
         .add-btn:hover { opacity: 0.9; }
 
+        /* CART ACTIONS: Back & Checkout buttons */
+        .checkout-btn {
+            background: #7d5ba6;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        .checkout-btn:hover { opacity: 0.9; }
 
+        /* RESPONSIVE GRID */
         @media (max-width: 768px) {
             .item-grid { justify-content: center; }
             .item-card { width: 90%; }
@@ -137,7 +151,7 @@
 
 <body>
 
-<!-- HEADER: Logo + User Profile -->
+<!-- HEADER -->
 <div class="header">
     <div class="logo"><span>Schmendrick's</span> Weaponry</div>
     <div class="profile">
@@ -146,7 +160,7 @@
     </div>
 </div>
 
-<!-- Search bar + Cart info -->
+<!-- SEARCH + CART INFO -->
 <div class="search-section">
     <div class="search-container">
         🔍
@@ -154,7 +168,7 @@
     </div>
     <div class="cart" id="cartButton">
         🛒 Cart: <span id="cartCount" th:text="${cartCount}">0</span>
-        | Total: $<span id="cartTotal">0.00</span>
+        | Total: $<span id="cartTotal" th:text="${cartTotal}">0.00</span>
     </div>
 </div>
 
@@ -163,38 +177,42 @@
 
 <!-- ITEM GRID -->
 <div class="item-grid" id="itemGrid">
+    <!-- Item card loop -->
     <div class="item-card" th:each="item : ${items}" th:attr="data-id=${item.id}" th:data-price="${item.price}">
-        <!-- Item image -->
         <img th:src="@{${item.image}}" th:alt="${item.name}">
-        <!-- Item info: name, description, price -->
         <h3 th:text="${item.name}"></h3>
         <p th:text="${item.description}"></p>
         <p>Price: $<span th:text="${item.price}"></span></p>
-        <!-- Add to cart button -->
+        <!-- Add to Cart -->
         <button class="add-btn" th:onclick="'addToCart(' + ${item.id} + ', ' + ${item.price} + ')'">Add to Cart</button>
     </div>
 </div>
 
+<!-- CART ACTIONS: Back to Inventory + Checkout -->
+<div class="cart-actions" style="padding: 20px 40px; display: flex; gap: 20px; justify-content: flex-end;">
+    <button class="back-btn" onclick="window.location.href='/inventory'">Back to Inventory</button>
+    <button class="checkout-btn" id="checkoutBtn" th:if="${cartCount > 0}" onclick="window.location.href='/checkout'">
+        Checkout
+    </button>
+</div>
+
+<!-- JAVASCRIPT -->
 <script>
     // Initialize cart count and total
     let cartCount = parseInt(document.getElementById("cartCount").textContent);
     let cartTotal = parseFloat(document.getElementById("cartTotal").textContent);
 
-    // Add item to cart function
+    // Add item to cart
     function addToCart(id, price) {
         fetch(`/inventory/add-to-cart/${id}`, { method: 'POST' })
             .then(response => {
                 if (response.ok) {
-                    // Remove item card from page
                     const card = document.querySelector(`.item-card[data-id='${id}']`);
                     if (card) card.remove();
 
-                    // Update cart count
                     cartCount += 1;
-                    document.getElementById("cartCount").textContent = cartCount;
-
-                    // Update cart total
                     cartTotal += parseFloat(price);
+                    document.getElementById("cartCount").textContent = cartCount;
                     document.getElementById("cartTotal").textContent = cartTotal.toFixed(2);
                 } else {
                     alert("Failed to add item to cart.");
@@ -202,20 +220,19 @@
             });
     }
 
-    // Client-side search functionality
+    // Navigate to cart page when cart button clicked
+    document.getElementById("cartButton").addEventListener("click", () => {
+        window.location.href = "/cart";
+    });
+
+    // Search filter
     const searchBar = document.getElementById("searchBar");
     searchBar.addEventListener("input", () => {
         const filter = searchBar.value.toLowerCase();
         document.querySelectorAll(".item-card").forEach(card => {
             const name = card.querySelector("h3").textContent.toLowerCase();
-            card.style.display = name.includes(filter) ? "flex" : "none"; // keep flex display for vertical stacking
+            card.style.display = name.includes(filter) ? "flex" : "none";
         });
-    });
-
-    // Cart button click: placeholder for future cart page
-    const cartButton = document.getElementById("cartButton");
-    cartButton.addEventListener("click", () => {
-        window.location.href = "/cart"; // TODO: replace with actual cart page
     });
 </script>
 

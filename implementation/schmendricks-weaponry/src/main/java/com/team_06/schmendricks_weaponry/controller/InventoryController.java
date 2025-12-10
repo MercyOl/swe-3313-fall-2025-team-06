@@ -1,6 +1,7 @@
 package com.team_06.schmendricks_weaponry.controller;
 
 import com.team_06.schmendricks_weaponry.model.Item;
+import com.team_06.schmendricks_weaponry.service.CartService;
 import com.team_06.schmendricks_weaponry.service.InventoryService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -8,87 +9,61 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-/*
- This controller handles everything related to the inventory page.
- It provides endpoints to get items as JSON, display the inventory page,
- and mark items as added to the cart.
-*/
+/**
+ * Controller for handling inventory page and actions.
+ * For viewing available items, searching, and adding items to the cart.
+ */
 @Controller
-@RequestMapping("/inventory") // all inventory-related paths start with /inventory so it's easier to find
-@CrossOrigin(origins = "*")   // allow requests from any origin
+@RequestMapping("/inventory")
 public class InventoryController {
 
-    private final InventoryService service;
+    private final InventoryService inventoryService; // Service to manage inventory items
+    private final CartService cartService;           // Service to manage shopping cart
 
-
-    // The service handles all the logic for getting items, adding to cart, etc.
-    public InventoryController(InventoryService service) {
-        this.service = service;
+    // Constructor injection for services
+    public InventoryController(InventoryService inventoryService, CartService cartService) {
+        this.inventoryService = inventoryService;
+        this.cartService = cartService;
     }
 
-
-
-    /*
-     Returns all items as JSON.
-    */
-    @GetMapping("/api/items")
-    @ResponseBody
-    public List<Item> getItems() {
-        return service.getItems();
-    }
-
-    /*
-     Returns a single item by its ID as JSON.
-    */
-    @GetMapping("/api/items/{id}")
-    @ResponseBody
-    public Item getItemById(@PathVariable int id) {
-        return service.getItemsWithId(id);
-    }
-
-    // ================= ADD TO CART =================
-
-    /*
-     Marks an item as added to the cart by setting its availability to false.
-     This prevents it from showing in the inventory page.
-    */
-    @PostMapping("/add-to-cart/{id}")
-    @ResponseBody
-    public String addToCart(@PathVariable int id) {
-        service.addToCart(id);
-        return "success";
-    }
-
-
-    /*
-     Loads the inventory page with available items.
-     Optional search parameter filters items by name.
-     Also counts the items in the cart (unavailable items) for display.
-    */
+    /**
+     * Displays the inventory page.
+     * filters items by a search term.
+     */
     @GetMapping
     public String inventoryPage(Model model, @RequestParam(required = false) String search) {
-
-        // get only items that are still available
-        List<Item> items = service.getItems().stream()
+        // Get available items
+        List<Item> items = inventoryService.getItems().stream()
                 .filter(Item::isAvailable)
                 .toList();
 
-        // filter by search term if provided
+        // Apply search filter if provided
         if (search != null && !search.isEmpty()) {
+            String lower = search.toLowerCase();
             items = items.stream()
-                    .filter(item -> item.getName().toLowerCase().contains(search.toLowerCase()))
+                    .filter(i -> i.getName().toLowerCase().contains(lower))
                     .toList();
         }
 
-        // count how many items are in the cart (unavailable)
-        long cartCount = service.getItems().stream()
-                .filter(item -> !item.isAvailable())
-                .count();
-
-        // pass the items and cart count to the page for display
+        // Add attributes to the model for Thymeleaf
         model.addAttribute("items", items);
-        model.addAttribute("cartCount", cartCount);
+        model.addAttribute("cartCount", cartService.getTotalQuantity());
+        model.addAttribute("cartTotal", cartService.getTotalPrice());
+        return "inventory";
+    }
 
-        return "inventory"; // render inventory.html
+    /**
+     * Adds an item to the cart.
+     * Returns "success" if added, "error" if the item doesn't exist or is unavailable.
+     */
+    @PostMapping("/add-to-cart/{id}")
+    @ResponseBody
+    public String addToCart(@PathVariable int id) {
+        Item item = inventoryService.getItemById(id);
+        if (item == null || !item.isAvailable()) return "error";
+
+        cartService.addItem(item);
+        item.setAvailable(false); // Hide from inventory after adding to cart
+        return "success";
     }
 }
