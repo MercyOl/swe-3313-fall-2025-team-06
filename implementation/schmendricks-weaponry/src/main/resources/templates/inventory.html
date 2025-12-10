@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
+
+<script>
+    //HTML CREATED WITH CHATGPT (SLIGHTLY MODIFIED)
+</script>
+
 <head>
     <meta charset="UTF-8">
     <title>Schmendrick's Weaponry</title>
@@ -26,6 +31,20 @@
         .logo span { font-size: 32px; }
         .profile { display: flex; align-items: center; gap: 10px; font-size: 18px; }
         .profile-img { width: 45px; height: 45px; background: #eee; border-radius: 50%; }
+
+        /* NEW STYLE: Admin Button in Header */
+        .admin-btn {
+            background: #7d5ba6; /* Purple color from navbar */
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 20px; /* Space it from the profile name */
+        }
+        .admin-btn:hover { background: #6b4ca5; } /* Slightly darker purple on hover */
+
 
         /* SEARCH SECTION: Search bar + Cart info */
         .search-section {
@@ -151,16 +170,20 @@
 
 <body>
 
-<!-- HEADER -->
 <div class="header">
     <div class="logo"><span>Schmendrick's</span> Weaponry</div>
     <div class="profile">
-        Name
+        <button th:if="${currentUser.isAdmin}"
+                class="admin-btn"
+                onclick="window.location.href='/admin/sales-report'">
+            Sales Report
+        </button>
+
+        <span th:text="${currentUser.username}">Name</span>
         <div class="profile-img"></div>
     </div>
 </div>
 
-<!-- SEARCH + CART INFO -->
 <div class="search-section">
     <div class="search-container">
         🔍
@@ -172,23 +195,18 @@
     </div>
 </div>
 
-<!-- SECTION TITLE -->
 <div class="section-title">Recommended</div>
 
-<!-- ITEM GRID -->
 <div class="item-grid" id="itemGrid">
-    <!-- Item card loop -->
     <div class="item-card" th:each="item : ${items}" th:attr="data-id=${item.id}" th:data-price="${item.price}">
         <img th:src="@{${item.image}}" th:alt="${item.name}">
         <h3 th:text="${item.name}"></h3>
         <p th:text="${item.description}"></p>
         <p>Price: $<span th:text="${item.price}"></span></p>
-        <!-- Add to Cart -->
         <button class="add-btn" th:onclick="'addToCart(' + ${item.id} + ', ' + ${item.price} + ')'">Add to Cart</button>
     </div>
 </div>
 
-<!-- CART ACTIONS: Back to Inventory + Checkout -->
 <div class="cart-actions" style="padding: 20px 40px; display: flex; gap: 20px; justify-content: flex-end;">
     <button class="back-btn" onclick="window.location.href='/inventory'">Back to Inventory</button>
     <button class="checkout-btn" id="checkoutBtn" th:if="${cartCount > 0}" onclick="window.location.href='/checkout'">
@@ -196,7 +214,6 @@
     </button>
 </div>
 
-<!-- JAVASCRIPT -->
 <script>
     // Initialize cart count and total
     let cartCount = parseInt(document.getElementById("cartCount").textContent);

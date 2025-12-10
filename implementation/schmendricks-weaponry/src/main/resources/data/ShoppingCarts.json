@@ -1,25 +1,4 @@
 [ {
-  "items" : [ {
-    "id" : 5,
-    "name" : "Spiked Club",
-    "description" : "Crude bludgeon with vicious metal spikes.",
-    "price" : 25.00,
-    "available" : false,
-    "image" : "/images/SpikedWoodenClub_icon.png"
-  }, {
-    "id" : 7,
-    "name" : "Spear",
-    "description" : "Long thrusting weapon with sharp point.",
-    "price" : 25.00,
-    "available" : false,
-    "image" : "/images/Spear_icon.png"
-  }, {
-    "id" : 10,
-    "name" : "Longbow",
-    "description" : "Tall bow delivering powerful distant shots.",
-    "price" : 100.00,
-    "available" : true,
-    "image" : "/images/LongBow_icon.png"
-  } ],
+  "items" : [ ],
   "cartId" : 0
 } ]

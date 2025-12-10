@@ -1,10 +1,12 @@
 package com.team_06.schmendricks_weaponry.controller;
 
+import com.team_06.schmendricks_weaponry.service.UserService;
 import com.team_06.schmendricks_weaponry.model.CartSummary;
 import com.team_06.schmendricks_weaponry.model.Item;
 import com.team_06.schmendricks_weaponry.model.ShippingOption;
 import com.team_06.schmendricks_weaponry.model.ShoppingCart;
 import com.team_06.schmendricks_weaponry.service.CartService;
+import com.team_06.schmendricks_weaponry.service.InventoryService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +19,12 @@ public class CheckOutController {
 
     @Autowired
     private CartService cartService;
+
+    @Autowired
+    private InventoryService inventoryService;
+
+    @Autowired
+    private UserService userService;
 
     private String shippingOpt;
 
@@ -47,6 +55,8 @@ public class CheckOutController {
     // Form submission
     @PostMapping("/payment")
     public String continueToPayment(@RequestParam("shipping") String shipping) {
+        shippingOpt = shipping;
+
         // do any session/cart updates here
         return "redirect:/payment?shipping=" + shipping; // redirect to GET
     }
@@ -55,10 +65,9 @@ public class CheckOutController {
     @GetMapping("/payment")
     public String showPayment(@RequestParam("shipping") String shipping, Model model) {
         ShippingOption selectedShipping = ShippingOption.valueOf(shipping);
-        shippingOpt = shipping;
         CartSummary cart = new CartSummary(cartService.getCurrentCart(), selectedShipping);
 
-        model.addAttribute("shipping", selectedShipping);
+        model.addAttribute("shipping", shipping);
         model.addAttribute("cart", cart);
 
         return "payment"; // payment.html
@@ -66,6 +75,8 @@ public class CheckOutController {
 
     @GetMapping("/confirmation")
     public String showOrderConfirmation(Model model) {
+        cartService.clearCart();
+
         ShippingOption selectedShipping = ShippingOption.valueOf(shippingOpt);
         CartSummary orderSummary = new CartSummary(cartService.getCurrentCart(), selectedShipping);
 
@@ -75,7 +86,7 @@ public class CheckOutController {
         model.addAttribute("cart", orderSummary);
 
         // Customer and Order Details (Needed for the left column confirmation)
-        model.addAttribute("customerEmail", "hero.link@hyrule.com");
+        model.addAttribute("customerEmail", userService.getCurrentUser().getEmail());
         model.addAttribute("orderNumber", "#SW-000456");
         model.addAttribute("estimatedDelivery", "Thursday, Dec 11, 2025");
         model.addAttribute("shippingAddress", "123 Hero’s Way, Kennesaw, GA 30144");
@@ -90,5 +101,13 @@ public class CheckOutController {
         return "confirmation"; // Renders confirmation.html
     }
 
+    @PostMapping("/remove")
+    public String removeFromCart(@RequestParam int itemId) {
+
+        cartService.removeItem(itemId);
+
+        // Redirect back to the checkout page to refresh the view
+        return "redirect:/checkout";
+    }
 
 }

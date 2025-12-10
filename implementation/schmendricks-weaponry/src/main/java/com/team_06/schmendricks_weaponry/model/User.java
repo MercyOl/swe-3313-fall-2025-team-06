@@ -1,6 +1,4 @@
-package com.team_06.schmendricks_weaponry;
-
-import java.util.ArrayList;
+package com.team_06.schmendricks_weaponry.model;
 
 public class User {
 

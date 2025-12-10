@@ -1,9 +1,9 @@
-package com.team_06.schmendricks_weaponry;
+package com.team_06.schmendricks_weaponry.service;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
-import com.team_06.schmendricks_weaponry.service.CartService;
+import com.team_06.schmendricks_weaponry.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;

@@ -1,6 +1,5 @@
 package com.team_06.schmendricks_weaponry.service;
 
-import com.team_06.schmendricks_weaponry.UserService;
 import com.team_06.schmendricks_weaponry.model.Item;
 import com.team_06.schmendricks_weaponry.model.ShoppingCart;
 import com.fasterxml.jackson.core.type.TypeReference;
@@ -20,6 +19,9 @@ public class CartService {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private InventoryService inventoryService;
 
     private final ObjectMapper mapper = new ObjectMapper();
     private final File cartStorage = new File("src/main/resources/data/ShoppingCarts.json");
@@ -53,6 +55,12 @@ public class CartService {
         return carts.get(userId);
     }
 
+    public void createCart(ShoppingCart cart){
+        carts.add(cart);
+
+        saveCarts();
+    }
+
     public List<Item> getCartItems() {
         return getCurrentCart().getItems();
     }
@@ -67,6 +75,8 @@ public class CartService {
         ShoppingCart cart = getCurrentCart();
         cart.getItems().removeIf(item -> item.getId() == id);
         saveCarts();
+
+        inventoryService.setItemAvailable(id, true);
     }
 
     public BigDecimal getTotalPrice() {

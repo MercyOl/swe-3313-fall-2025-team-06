@@ -3,6 +3,8 @@ package com.team_06.schmendricks_weaponry.controller;
 import com.team_06.schmendricks_weaponry.model.Item;
 import com.team_06.schmendricks_weaponry.service.CartService;
 import com.team_06.schmendricks_weaponry.service.InventoryService;
+import com.team_06.schmendricks_weaponry.service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -16,6 +18,9 @@ public class InventoryController {
     private final InventoryService inventoryService;
     private final CartService cartService;
 
+    @Autowired
+    private UserService userService;
+
     public InventoryController(InventoryService inventoryService, CartService cartService) {
         this.inventoryService = inventoryService;
         this.cartService = cartService;
@@ -23,6 +28,9 @@ public class InventoryController {
 
     @GetMapping
     public String inventoryPage(Model model, @RequestParam(required = false) String search) {
+        // send the user to check if they can access sales report
+        model.addAttribute("currentUser", userService.getCurrentUser());
+
         List<Item> items = inventoryService.getItems().stream()
                 .filter(Item::isAvailable)
                 .toList();

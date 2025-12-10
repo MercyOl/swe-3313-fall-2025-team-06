@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<script>
+    //HTML CREATED WITH CHATGPT (SLIGHTLY MODIFIED)
+</script>
+
 <head>
     <meta charset="UTF-8"/>
     <title>Checkout</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* BASE STYLES */
         body { font-family: "Montserrat", sans-serif; margin: 0; background: #f2f6fb; color: #1f2640; }
         .checkout-header { background: #6b4ca5; color: #fff; padding: 18px; display: flex; align-items: center; gap: 24px; }
         .checkout-home { color: #fff; text-decoration: none; font-size: 18px; opacity: 0.9; }
@@ -23,12 +29,42 @@
         .checkout-button-wrapper { margin-top: 24px; text-align: center; }
         .checkout-btn { background: #4aa9ff; color: white; border: none; padding: 16px 28px; font-size: 20px; font-weight: 700; border-radius: 8px; cursor: pointer; width: 85%; transition: 0.2s ease; }
         .checkout-btn:hover { background: #238be6; }
+
+        /* --- NEW FORM STYLES --- */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px 16px;
+        }
+        .form-group { display: flex; flex-direction: column; font-size: 13px; }
+        .form-group.full-width { grid-column: 1 / -1; }
+        .form-group label { margin-bottom: 4px; font-weight: 500; }
+
+        /* Input/Select Styling */
+        .form-group input, .form-group select {
+            padding: 10px 12px;
+            border: 1px solid #d4d8e0;
+            border-radius: 4px;
+            font-size: 15px;
+            color: #1f2640;
+            background: #fff;
+            transition: border-color 0.2s ease;
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline: none;
+            border-color: #6b4ca5; /* Highlight border on focus */
+            box-shadow: 0 0 0 1px #6b4ca5;
+        }
+
+        /* Optional style for visual consistency */
+        .required { color: #1f2640; font-weight: 700; margin-left: 2px; }
+        .form-group select { width: 100%; }
     </style>
 </head>
 <body>
 
 <div class="checkout-header">
-    <a href="/" class="checkout-home">Home</a>
+    <a href="/inventory" class="checkout-home">Home</a>
     <span class="checkout-title">Checkout</span>
 </div>
 

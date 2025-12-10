@@ -3,17 +3,19 @@ package com.team_06.schmendricks_weaponry.service;
 import com.team_06.schmendricks_weaponry.model.Item;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.team_06.schmendricks_weaponry.model.User;
 import org.springframework.stereotype.Service;
 
+import java.io.IOException;
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Service for managing inventory items.
- * Loads items from JSON.
- */
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+
 @Service
 public class InventoryService {
 
@@ -24,10 +26,8 @@ public class InventoryService {
         loadItemsFromJson();
     }
 
-    /**
-     * Load items from items.json located in resources/data.
-     * Converts prices to BigDecimal and stores items in the inventory list.
-     */
+    private File inventoryDataFile = new File("src/main/resources/data/UserData.json");
+
     private void loadItemsFromJson() {
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -46,6 +46,11 @@ public class InventoryService {
         } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    public void saveInventory(List<Item> invList) throws IOException {
+        ObjectMapper mapper = new ObjectMapper();
+        mapper.writerWithDefaultPrettyPrinter().writeValue(inventoryDataFile, invList);
     }
 
     /**
@@ -70,6 +75,12 @@ public class InventoryService {
         Item item = getItemById(id);
         if (item != null) {
             item.setAvailable(available);
+        }
+
+        try {
+            saveInventory(items);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
         }
     }
 }

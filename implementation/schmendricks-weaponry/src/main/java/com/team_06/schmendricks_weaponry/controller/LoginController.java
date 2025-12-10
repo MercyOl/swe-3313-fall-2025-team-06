@@ -1,8 +1,11 @@
 package com.team_06.schmendricks_weaponry.controller;
 
 
-import com.team_06.schmendricks_weaponry.User;
-import com.team_06.schmendricks_weaponry.UserService;
+import com.team_06.schmendricks_weaponry.model.Item;
+import com.team_06.schmendricks_weaponry.model.ShoppingCart;
+import com.team_06.schmendricks_weaponry.model.User;
+import com.team_06.schmendricks_weaponry.service.CartService;
+import com.team_06.schmendricks_weaponry.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +21,9 @@ public class LoginController {
 
     @Autowired
     private UserService loginService;
+
+    @Autowired
+    private CartService cartService;
 
     @GetMapping("/")
     public String loginPage(Model model) {
@@ -53,6 +59,9 @@ public class LoginController {
         try {
 
             loginService.addUser(newUser);
+
+            ShoppingCart newCart = new ShoppingCart(new ArrayList<Item>(), 0);
+            cartService.createCart(newCart);
 
         }catch(Exception e){
             System.out.println(e.getMessage());
