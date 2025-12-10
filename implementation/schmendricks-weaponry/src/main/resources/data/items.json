@@ -1,106 +1,92 @@
-[
-  {
-    "id": 1,
-    "name": "Knife",
-    "description": "Short, cheap blade. Good as a sidearm.",
-    "price": "10.00",
-    "available": true,
-    "image": "/images/Knife_icon.png"
-  },
-  {
-    "id": 2,
-    "name": "Shortsword",
-    "description": "A lightweight, versatile sword.",
-    "price": "40.00",
-    "available": true,
-    "image": "/images/Shortsword_icon.png"
-  },
-  {
-    "id": 3,
-    "name": "Longsword",
-    "description": "A powerful two-handed sword.",
-    "price": "100.00",
-    "available": true,
-    "image": "/images/Longsword_icon.png"
-  },
-  {
-    "id": 4,
-    "name": "Wooden Club",
-    "description": "Cheap, durable, and reliable bludgeon.",
-    "price": "15.00",
-    "available": true,
-    "image": "/images/Woodenclub_icon.png"
-  },
-  {
-    "id": 5,
-    "name": "Spiked Club",
-    "description": "Crude bludgeon with vicious metal spikes.",
-    "price": "25.00",
-    "available": true,
-    "image": "/images/SpikedWoodenClub_icon.png"
-  },
-  {
-    "id": 6,
-    "name": "Warhammer",
-    "description": "Heavy hammer head for crushing armor.",
-    "price": "75.00",
-    "available": true,
-    "image": "/images/Warhammer_icon.png"
-  },
-  {
-    "id": 7,
-    "name": "Spear",
-    "description": "Long thrusting weapon with sharp point.",
-    "price": "25.00",
-    "available": true,
-    "image": "/images/Spear_icon.png"
-  },
-  {
-    "id": 8,
-    "name": "Pike",
-    "description": "Extremely long spear for keeping distance.",
-    "price": "70.00",
-    "available": true,
-    "image": "/images/Pike_icon.png"
-  },
-  {
-    "id": 9,
-    "name": "Halberd",
-    "description": "Axe-spear hybrid for reach and versatility.",
-    "price": "120.00",
-    "available": true,
-    "image": "/images/Halberd_icon.png"
-  },
-  {
-    "id": 10,
-    "name": "Longbow",
-    "description": "Tall bow delivering powerful distant shots.",
-    "price": "100.00",
-    "available": true,
-    "image": "/images/LongBow_icon.png"
-  },
-  {
-    "id": 11,
-    "name": "Crossbow",
-    "description": "Mechanical bow firing bolts precisely.",
-    "price": "150.00",
-    "available": true,
-    "image": "/images/CrossBow_icon.png"
-  },
-  {
-    "id": 12,
-    "name": "Catapult",
-    "description": "Tension-launched stones for siege assaults.",
-    "price": "500.00",
-    "available": true,
-    "image": "/images/Catapult_icon.png"
-  },
-  {
-    "id": 13,
-    "name": "Trebuchet",
-    "description": "Counterweight launcher hurling massive projectiles.",
-    "price": "1000.00",
-    "available": true,
-    "image": "/images/Trebuchet_icon.png"
-  }
-]
+[ {
+  "id" : 1,
+  "name" : "Knife",
+  "description" : "Short, cheap blade. Good as a sidearm.",
+  "price" : 10.00,
+  "available" : true,
+  "image" : "/images/Knife_icon.png"
+}, {
+  "id" : 2,
+  "name" : "Shortsword",
+  "description" : "A lightweight, versatile sword.",
+  "price" : 40.00,
+  "available" : true,
+  "image" : "/images/Shortsword_icon.png"
+}, {
+  "id" : 3,
+  "name" : "Longsword",
+  "description" : "A powerful two-handed sword.",
+  "price" : 100.00,
+  "available" : true,
+  "image" : "/images/Longsword_icon.png"
+}, {
+  "id" : 4,
+  "name" : "Wooden Club",
+  "description" : "Cheap, durable, and reliable bludgeon.",
+  "price" : 15.00,
+  "available" : true,
+  "image" : "/images/Woodenclub_icon.png"
+}, {
+  "id" : 5,
+  "name" : "Spiked Club",
+  "description" : "Crude bludgeon with vicious metal spikes.",
+  "price" : 25.00,
+  "available" : true,
+  "image" : "/images/SpikedWoodenClub_icon.png"
+}, {
+  "id" : 6,
+  "name" : "Warhammer",
+  "description" : "Heavy hammer head for crushing armor.",
+  "price" : 75.00,
+  "available" : true,
+  "image" : "/images/Warhammer_icon.png"
+}, {
+  "id" : 7,
+  "name" : "Spear",
+  "description" : "Long thrusting weapon with sharp point.",
+  "price" : 25.00,
+  "available" : true,
+  "image" : "/images/Spear_icon.png"
+}, {
+  "id" : 8,
+  "name" : "Pike",
+  "description" : "Extremely long spear for keeping distance.",
+  "price" : 70.00,
+  "available" : true,
+  "image" : "/images/Pike_icon.png"
+}, {
+  "id" : 9,
+  "name" : "Halberd",
+  "description" : "Axe-spear hybrid for reach and versatility.",
+  "price" : 120.00,
+  "available" : true,
+  "image" : "/images/Halberd_icon.png"
+}, {
+  "id" : 10,
+  "name" : "Longbow",
+  "description" : "Tall bow delivering powerful distant shots.",
+  "price" : 100.00,
+  "available" : true,
+  "image" : "/images/LongBow_icon.png"
+}, {
+  "id" : 11,
+  "name" : "Crossbow",
+  "description" : "Mechanical bow firing bolts precisely.",
+  "price" : 150.00,
+  "available" : true,
+  "image" : "/images/CrossBow_icon.png"
+}, {
+  "id" : 12,
+  "name" : "Catapult",
+  "description" : "Tension-launched stones for siege assaults.",
+  "price" : 500.00,
+  "available" : true,
+  "image" : "/images/Catapult_icon.png"
+}, {
+  "id" : 13,
+  "name" : "Trebuchet",
+  "description" : "Counterweight launcher hurling massive projectiles.",
+  "price" : 1000.00,
+  "available" : true,
+  "image" : "/images/Trebuchet_icon.png"
+} ]
