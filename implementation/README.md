@@ -107,7 +107,7 @@ mvn clean install
 
 Or reload Maven in IntelliJ.
 
-### **3. Incorrect version of Java**
+#### **3. Incorrect version of Java**
 
 Fix:
 
