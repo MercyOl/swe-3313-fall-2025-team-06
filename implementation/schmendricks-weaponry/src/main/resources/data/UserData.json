@@ -1,7 +1,9 @@
-[ {
-	"userId": 0,
-	"username": SchmenAdmin,
-	"email": SchmenAdmin@gmail.com,
-	"password": Schmendrick1234,
-	"isAdmin": true
-} ]
+[
+  {
+    "userId": 0,
+    "username": "SchmenAdmin",
+    "email": "SchmenAdmin@gmail.com",
+    "password": "Schmendrick1234",
+    "isAdmin": true
+  }
+]
