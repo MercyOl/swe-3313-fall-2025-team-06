@@ -234,7 +234,6 @@
   <div class="checkout-layout">
 
 
-    <!-- LEFT: CONFIRMATION INFO -->
     <div class="card">
       <div class="card-header">
         <span>Thank you for your order!</span>
@@ -251,6 +250,16 @@
         <span th:text="${customerEmail}">example@email.com</span>.
       </div>
 
+
+      <div class="confirm-detail">
+        <span class="label">Payment Method:</span>
+        <span th:text="${paymentMethod}">Visa ending in 4242</span>
+      </div>
+
+      <div class="confirm-detail">
+        <span class="label">Shipping Method:</span>
+        <span th:text="${shippingMethodName}">Ground (Free)</span>
+      </div>
 
       <div class="confirm-detail">
         <span class="label">Order number:</span>
@@ -276,7 +285,6 @@
     </div>
 
 
-    <!-- RIGHT: ORDER SUMMARY -->
     <div class="card">
       <div class="card-header">
         <span>Order Summary</span>
@@ -285,38 +293,42 @@
 
       <div class="summary-line">
         <span>Subtotal:</span>
-        <span class="summary-amount"
-              th:text="${#numbers.formatDecimal(cart.subtotal, 1, 'COMMA', 2, 'POINT')}">
+        <span class="summary-amount" th:if="${cart?.subtotal != null}"
+              th:text="|$| + ${#numbers.formatDecimal(cart.subtotal, 1, 'COMMA', 2, 'POINT')}">
                    $000.00
                </span>
+        <span th:unless="${cart?.subtotal != null}">$0.00</span>
       </div>
       <div class="summary-line">
         <span>Estimated Shipping:</span>
-        <span class="summary-amount"
-              th:text="${#numbers.formatDecimal(cart.estimatedShipping, 1, 'COMMA', 2, 'POINT')}">
+        <span class="summary-amount" th:if="${cart?.estimatedShipping != null}"
+              th:text="|$| + ${#numbers.formatDecimal(cart.estimatedShipping, 1, 'COMMA', 2, 'POINT')}">
                    $000.00
                </span>
+        <span th:unless="${cart?.estimatedShipping != null}">$0.00</span>
       </div>
       <div class="summary-line">
         <span>Estimated Tax:</span>
-        <span class="summary-amount"
-              th:text="${#numbers.formatDecimal(cart.estimatedTax, 1, 'COMMA', 2, 'POINT')}">
+        <span class="summary-amount" th:if="${cart?.estimatedTax != null}"
+              th:text="|$| + ${#numbers.formatDecimal(cart.estimatedTax, 1, 'COMMA', 2, 'POINT')}">
                    $000.00
                </span>
+        <span th:unless="${cart?.estimatedTax != null}">$0.00</span>
       </div>
 
 
       <div class="summary-line total">
         <span>Total</span>
-        <span class="summary-amount"
-              th:text="${#numbers.formatDecimal(cart.total, 1, 'COMMA', 2, 'POINT')}">
+        <span class="summary-amount" th:if="${cart?.total != null}"
+              th:text="|$| + ${#numbers.formatDecimal(cart.total, 1, 'COMMA', 2, 'POINT')}">
                    $000.00
                </span>
+        <span th:unless="${cart?.total != null}">$0.00</span>
       </div>
 
 
       <div class="cart-items">
-        <div th:each="item : ${cart.getCartItems()}" class="cart-item">
+        <div th:each="item : ${cart?.cartItems}" class="cart-item">
           <div class="cart-thumb"></div>
           <div>
             <div class="cart-info-title" th:text="${item.name}">Item title</div>
@@ -325,9 +337,11 @@
             </div>
             <div class="cart-info-price">
               Price:
-              <span th:text="${#numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')}">
+              <span th:if="${item?.price != null}"
+                    th:text="|$| + ${#numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')}">
                                $000.00
                            </span>
+              <span th:unless="${item?.price != null}">$0.00</span>
             </div>
           </div>
         </div>
@@ -337,9 +351,5 @@
     </div>
 
 
-  </div> <!-- /.checkout-layout -->
-</div> <!-- /.page -->
-
-
-</body>
+  </div> </div> </body>
 </html>

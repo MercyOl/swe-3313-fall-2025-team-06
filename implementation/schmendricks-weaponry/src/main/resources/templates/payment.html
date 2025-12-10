@@ -194,7 +194,6 @@
 
   <div class="checkout-layout">
 
-    <!-- LEFT: PAYMENT FORM -->
     <div class="card">
       <div class="card-header">
         <span>Credit Card</span>
@@ -235,44 +234,41 @@
       </div>
     </div>
 
-    <!-- RIGHT: SUMMARY -->
     <div class="card">
       <div class="card-header">
         <span>Order Summary</span>
       </div>
 
-      <!-- === Subtotal === -->
       <div class="summary-line">
         <span>Subtotal:</span>
         <span th:if="${cart?.subtotal != null}"
-              th:text="|$$| + ${#numbers.formatDecimal(cart.subtotal, 1, 'COMMA', 2, 'POINT')}"></span>
+              th:text="|$| + ${#numbers.formatDecimal(cart.subtotal, 1, 'COMMA', 2, 'POINT')}"></span>
         <span th:unless="${cart?.subtotal != null}">$0.00</span>
       </div>
 
       <div class="summary-line">
         <span>Estimated Shipping:</span>
         <span th:if="${cart?.estimatedShipping != null}"
-              th:text="|$$| + ${#numbers.formatDecimal(cart.estimatedShipping, 1, 'COMMA', 2, 'POINT')}"></span>
+              th:text="|$| + ${#numbers.formatDecimal(cart.estimatedShipping, 1, 'COMMA', 2, 'POINT')}"></span>
         <span th:unless="${cart?.estimatedShipping != null}">$0.00</span>
       </div>
 
       <div class="summary-line">
         <span>Estimated Tax:</span>
         <span th:if="${cart?.estimatedTax != null}"
-              th:text="|$$| + ${#numbers.formatDecimal(cart.estimatedTax, 1, 'COMMA', 2, 'POINT')}"></span>
+              th:text="|$| + ${#numbers.formatDecimal(cart.estimatedTax, 1, 'COMMA', 2, 'POINT')}"></span>
         <span th:unless="${cart?.estimatedTax != null}">$0.00</span>
       </div>
 
       <div class="summary-line total">
         <span>Total:</span>
         <span th:if="${cart?.total != null}"
-              th:text="|$$| + ${#numbers.formatDecimal(cart.total, 1, 'COMMA', 2, 'POINT')}"></span>
+              th:text="|$| + ${#numbers.formatDecimal(cart.total, 1, 'COMMA', 2, 'POINT')}"></span>
         <span th:unless="${cart?.total != null}">$0.00</span>
       </div>
 
-      <!-- Items -->
       <div class="cart-items">
-        <div th:each="item : ${cart != null ? cart.cartItems : null}" class="cart-item">
+        <div th:each="item : ${cart?.cartItems}" class="cart-item">
           <div class="cart-thumb"></div>
           <div>
             <div class="cart-info-title" th:text="${item.name}">Item title</div>
@@ -280,9 +276,11 @@
 
             <div class="cart-info-price">
               Price:
-              <span th:text="'$' + #numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')">
+              <span th:if="${item?.price != null}"
+                    th:text="|$| + ${#numbers.formatDecimal(item.price, 1, 'COMMA', 2, 'POINT')}">
                 $0.00
               </span>
+              <span th:unless="${item?.price != null}">Price Missing</span>
             </div>
           </div>
         </div>
@@ -295,6 +293,3 @@
 
 </body>
 </html>
-
-
-

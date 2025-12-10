@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8" />
+    <meta charset="UTF-8"/>
     <title>Checkout</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         body { font-family: "Montserrat", sans-serif; margin: 0; background: #f2f6fb; color: #1f2640; }
@@ -17,7 +17,7 @@
         .summary-line { display: flex; justify-content: space-between; margin-bottom: 6px; font-size: 15px; }
         .summary-line.total { margin-top: 8px; font-weight: 700; font-size: 18px; border-top: 1px solid #d4d8e0; padding-top: 8px; }
         .cart-items { margin-top: 18px; border-top: 1px solid #d4d8e0; padding-top: 16px; }
-        .cart-item { display: grid; grid-template-columns: 80px minmax(0,1fr); gap: 10px; padding: 10px 0; border-bottom: 1px solid #d4d8e0; position: relative; }
+        .cart-item { display: grid; grid-template-columns: 80px minmax(0,1fr); gap: 10px; padding: 10px 0; border-bottom: 1px solid #d4d8e0; }
         .cart-thumb { width: 80px; height: 80px; border-radius: 3px; background: #e2e6f0; }
         .remove-btn { cursor: pointer; color: #cc1e1e; font-weight: 600; margin-top: 6px; display: inline-block; }
         .checkout-button-wrapper { margin-top: 24px; text-align: center; }
@@ -34,186 +34,118 @@
 
 <div class="page">
     <div class="checkout-layout">
-        <!-- LEFT: Customer Info -->
+
         <div class="card">
             <div class="card-header">
                 <span>Secure Checkout</span>
             </div>
-
             <form class="form-grid">
                 <div class="form-group">
                     <label>First Name<span class="required">*</span></label>
-                    <input type="text" placeholder="First Name"/>
+                    <input type="text" placeholder="First Name" name="firstName"/>
                 </div>
                 <div class="form-group">
                     <label>Last Name<span class="required">*</span></label>
-                    <input type="text" placeholder="Last Name"/>
+                    <input type="text" placeholder="Last Name" name="lastName"/>
                 </div>
                 <div class="form-group">
                     <label>Email<span class="required">*</span></label>
-                    <input type="email" placeholder="Email"/>
+                    <input type="email" placeholder="Email" name="email"/>
                 </div>
                 <div class="form-group">
                     <label>Phone<span class="required">*</span></label>
-                    <input type="tel" placeholder="Phone Number"/>
+                    <input type="tel" placeholder="Phone Number" name="phone"/>
                 </div>
                 <div class="form-group full-width">
                     <label>Address<span class="required">*</span></label>
-                    <input type="text" placeholder="e.g. 789 Street St"/>
+                    <input type="text" placeholder="Street Address" name="address"/>
                 </div>
                 <div class="form-group">
                     <label>City<span class="required">*</span></label>
-                    <input type="text" placeholder="e.g. Buford"/>
+                    <input type="text" placeholder="City" name="city"/>
                 </div>
                 <div class="form-group">
                     <label>State<span class="required">*</span></label>
-                    <input type="text" placeholder="e.g. Georgia"/>
+                    <input type="text" placeholder="State" name="state"/>
                 </div>
                 <div class="form-group">
                     <label>ZIP Code<span class="required">*</span></label>
-                    <input type="text" placeholder="e.g. 30043"/>
+                    <input type="text" placeholder="ZIP" name="zip"/>
                 </div>
 
-                <!-- Shipping Method -->
                 <div class="form-group full-width">
                     <label for="shipping">Shipping Method:</label>
-                    <select name="shipping" id="shipping">
-                        <option value="GROUND">Ground – Free</option>
-                        <option value="THREE_DAY">3-Day – $19</option>
-                        <option value="OVERNIGHT">Overnight – $29</option>
+                    <select name="shipping" id="shipping" onchange="this.form.submit()">
+                        <option th:value="GROUND" th:selected="${selectedShipping == T(com.team_06.schmendricks_weaponry.model.ShippingOption).GROUND}">Ground – Free</option>
+                        <option th:value="THREE_DAY" th:selected="${selectedShipping == T(com.team_06.schmendricks_weaponry.model.ShippingOption).THREE_DAY}">3-Day – $19</option>
+                        <option th:value="OVERNIGHT" th:selected="${selectedShipping == T(com.team_06.schmendricks_weaponry.model.ShippingOption).OVERNIGHT}">Overnight – $29</option>
                     </select>
                 </div>
             </form>
         </div>
 
-        <!-- RIGHT: Cart Summary -->
         <div class="card">
-            <div class="card-top-row">
-                <h2>In your Cart</h2>
-                <a href="#">Edit</a>
+            <h2>In your Cart</h2>
+
+            <div class="cart-items">
+                <div th:each="item, iterStat : ${cart?.cartItems}" class="cart-item" th:attr="data-id=${item.id},data-price=${item.price}">
+                    <div class="cart-thumb"></div>
+                    <div>
+                        <div class="cart-info-title" th:text="${item.name}">Item Name</div>
+                        <div class="cart-info-detail" th:text="${item.description}">Item description</div>
+                        <div class="cart-info-price">
+                            Price:
+                            <span th:if="${item?.price != null}"
+                                  th:text="|$| + ${#numbers.formatDecimal(item.price.doubleValue(), 1, 'COMMA', 2, 'POINT')}">$0.00</span>
+                            <span th:unless="${item?.price != null}">Price Missing</span>
+                        </div>
+
+                        <form th:action="@{/checkout/remove}" method="post" style="display:inline;">
+                            <input type="hidden" th:name="itemId" th:value="${item.id}"/>
+                            <button type="submit" class="remove-btn">Remove</button>
+                        </form>
+                    </div>
+                </div>
             </div>
 
             <div class="summary-line">
                 <span>Subtotal:</span>
-                <span class="summary-amount" id="subtotal">$0.00</span>
+                <span th:if="${cart?.subtotal != null}"
+                      th:text="|$| + ${#numbers.formatDecimal(cart.subtotal.doubleValue(),1,'COMMA',2,'POINT')}">$0.00</span>
+                <span th:unless="${cart?.subtotal != null}">$0.00</span>
             </div>
+
             <div class="summary-line">
                 <span>Estimated Shipping:</span>
-                <span class="summary-amount" id="shippingCost">$0.00</span>
+                <span th:if="${selectedShipping?.cost != null}"
+                      th:text="|$| + ${#numbers.formatDecimal(selectedShipping.cost.doubleValue(),1,'COMMA',2,'POINT')}">$0.00</span>
+                <span th:unless="${selectedShipping?.cost != null}">$0.00</span>
             </div>
+
             <div class="summary-line">
                 <span>Estimated Tax:</span>
-                <span class="summary-amount" id="tax">$0.00</span>
+                <span th:if="${cart?.estimatedTax != null}"
+                      th:text="|$| + ${#numbers.formatDecimal(cart.estimatedTax.doubleValue(),1,'COMMA',2,'POINT')}">$0.00</span>
+                <span th:unless="${cart?.estimatedTax != null}">$0.00</span>
             </div>
+
             <div class="summary-line total">
-                <span>Total</span>
-                <span class="summary-amount" id="total">$0.00</span>
+                <span>Total:</span>
+                <span th:if="${cart?.total != null and selectedShipping?.cost != null}"
+                      th:text="|$| + ${#numbers.formatDecimal(cart.total.add(selectedShipping.cost).doubleValue(),1,'COMMA',2,'POINT')}">$0.00</span>
+                <span th:unless="${cart?.total != null and selectedShipping?.cost != null}">$0.00</span>
             </div>
 
-            <div class="cart-items" id="cartItems">
-                <!-- Example cart items, each must have a unique data-id and price -->
-                <div class="cart-item" data-id="1" data-price="49.99">
-                    <div class="cart-thumb"></div>
-                    <div>
-                        <div class="cart-info-title">Steel Longsword</div>
-                        <div class="cart-info-detail">A finely crafted longsword with perfect balance.</div>
-                        <div class="cart-info-price">Price: $49.99</div>
-                        <div class="remove-btn">Remove</div>
-                    </div>
-                </div>
-                <div class="cart-item" data-id="2" data-price="29.99">
-                    <div class="cart-thumb"></div>
-                    <div>
-                        <div class="cart-info-title">Iron Shield</div>
-                        <div class="cart-info-detail">Sturdy shield for defense.</div>
-                        <div class="cart-info-price">Price: $29.99</div>
-                        <div class="remove-btn">Remove</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Payment form -->
             <div class="checkout-button-wrapper">
-                <form th:action="@{/payment}" method="post" id="paymentForm">
-                    <input type="hidden" name="shipping" id="shippingInput" value="GROUND">
-                    <div id="cartInputs"></div>
+                <form th:action="@{/payment}" method="post">
+                    <input type="hidden" th:name="shipping" th:value="${selectedShipping}"/>
                     <button type="submit" class="checkout-btn">Continue to Payment</button>
                 </form>
             </div>
+
         </div>
     </div>
 </div>
-
-<script>
-    const shippingCosts = { "GROUND": 0, "THREE_DAY": 19, "OVERNIGHT": 29 };
-    const taxRate = 0.06;
-
-    const shippingSelect = document.getElementById('shipping');
-    const shippingInput = document.getElementById('shippingInput');
-    const subtotalEl = document.getElementById('subtotal');
-    const shippingEl = document.getElementById('shippingCost');
-    const taxEl = document.getElementById('tax');
-    const totalEl = document.getElementById('total');
-    const cartItemsEl = document.getElementById('cartItems');
-    const cartInputsEl = document.getElementById('cartInputs');
-
-    function formatCurrency(amount) { return '$' + amount.toFixed(2); }
-
-    function calculateSubtotal() {
-        let subtotal = 0;
-        cartItemsEl.querySelectorAll('.cart-item').forEach(item => {
-            subtotal += parseFloat(item.getAttribute('data-price')) || 0;
-        });
-        return subtotal;
-    }
-
-    function updateTotals() {
-        let subtotal = calculateSubtotal();
-        let shipping = shippingCosts[shippingSelect.value];
-        let tax = subtotal * taxRate;
-        let total = subtotal + shipping + tax;
-
-        subtotalEl.textContent = formatCurrency(subtotal);
-        shippingEl.textContent = formatCurrency(shipping);
-        taxEl.textContent = formatCurrency(tax);
-        totalEl.textContent = formatCurrency(total);
-
-        // Update hidden shipping input
-        shippingInput.value = shippingSelect.value;
-    }
-
-    function updateCartInputs() {
-        cartInputsEl.innerHTML = '';
-        cartItemsEl.querySelectorAll('.cart-item').forEach((item, index) => {
-            const itemId = item.getAttribute('data-id');
-            const input = document.createElement('input');
-            input.type = 'hidden';
-            input.name = `cartItems[${index}].id`;
-            input.value = itemId;
-            cartInputsEl.appendChild(input);
-        });
-    }
-
-    // Remove item
-    cartItemsEl.addEventListener('click', function(e) {
-        if (e.target.classList.contains('remove-btn')) {
-            const item = e.target.closest('.cart-item');
-            if (item) item.remove();
-            updateTotals();
-            updateCartInputs();
-        }
-    });
-
-    // Shipping change
-    shippingSelect.addEventListener('change', () => {
-        updateTotals();
-    });
-
-    document.addEventListener('DOMContentLoaded', () => {
-        updateTotals();
-        updateCartInputs();
-    });
-</script>
 
 </body>
 </html>
