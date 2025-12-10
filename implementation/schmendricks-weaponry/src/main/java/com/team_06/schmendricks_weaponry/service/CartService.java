@@ -57,6 +57,10 @@ public class CartService {
         saveCarts(carts);
     }
 
+    public ShoppingCart getCurrentShoppingCart() {
+        return loadCarts().get(userService.getCurrentUser().getUserId());
+    }
+
 
     // Returns the list of items currently in the cart.
     public List<Item> getCartItems() {

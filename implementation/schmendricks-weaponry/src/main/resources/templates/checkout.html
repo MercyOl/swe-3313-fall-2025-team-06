@@ -418,10 +418,10 @@
 
 
             <div class="cart-items">
-                <div th:each="item : ${cart.items}" class="cart-item">
+                <div th:each="item : ${cart.getCartItems()}" class="cart-item">
                     <div class="cart-thumb"></div>
                     <div>
-                        <div class="cart-info-title" th:text="${item.title}">Lorem ipsum dolor sit</div>
+                        <div class="cart-info-title" th:text="${item.name}">Lorem ipsum dolor sit</div>
                         <div class="cart-info-detail" th:text="${item.description}">
                             Delivered WeekDay, Month Day
                         </div>

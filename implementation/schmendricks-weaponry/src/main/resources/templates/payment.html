@@ -305,10 +305,10 @@
 
 
       <div class="cart-items">
-        <div th:each="item : ${cart.items}" class="cart-item">
+        <div th:each="item : ${cart.getCartItems()}" class="cart-item">
           <div class="cart-thumb"></div>
           <div>
-            <div class="cart-info-title" th:text="${item.title}">Item title</div>
+            <div class="cart-info-title" th:text="${item.name}">Item title</div>
             <div class="cart-info-detail" th:text="${item.description}">
               Item description
             </div>

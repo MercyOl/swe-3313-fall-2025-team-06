@@ -17,6 +17,7 @@ public class CartSummary {
     public CartSummary(ShoppingCart cart, BigDecimal estimatedShipping) {
         this.cart = cart;
 
+        this.subtotal = new BigDecimal(0);
         for(int i = 0; i < cart.getItems().size(); i++) {
             this.subtotal = cart.getItems().get(i).getPrice();
         }
@@ -26,7 +27,7 @@ public class CartSummary {
         this.total = subtotal.add(estimatedShipping).add(estimatedTax);
     }
 
-
+    public List<Item> getCartItems() { return cart.getItems(); }
     public BigDecimal getSubtotal() { return subtotal; }
     public BigDecimal getEstimatedShipping() { return estimatedShipping; }
     public BigDecimal getEstimatedTax() { return estimatedTax; }
