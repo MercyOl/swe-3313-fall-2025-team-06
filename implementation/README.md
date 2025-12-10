@@ -106,3 +106,11 @@ mvn clean install
 ```
 
 Or reload Maven in IntelliJ.
+
+### **3. Incorrect version of Java**
+
+Fix:
+
+```
+install Java 23 [here](https://www.oracle.com/java/technologies/javase/jdk23-archive-downloads.html?utm_source=chatgpt.com)
+```
