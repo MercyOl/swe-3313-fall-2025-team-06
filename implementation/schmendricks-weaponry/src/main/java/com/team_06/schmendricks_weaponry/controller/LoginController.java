@@ -1,6 +1,8 @@
-package com.team_06.schmendricks_weaponry;
+package com.team_06.schmendricks_weaponry.controller;
 
 
+import com.team_06.schmendricks_weaponry.User;
+import com.team_06.schmendricks_weaponry.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,8 +75,10 @@ public class LoginController {
         for(int i = 0; i < userList.size(); i++){
             if(userList.get(i).getUsername().equals(username)){
                 if(userList.get(i).getPassword().equals(password)){
+                    loginService.setCurrentUser(userList.get(i));
+
                     System.out.println("USER SUCCESSFULLY LOGGED IN!");
-                    return "HomePage";      //REPLACE WITH REDIRECT TO HOMEPAGE
+                    return "redirect:/inventory";
                 }
             }
         }

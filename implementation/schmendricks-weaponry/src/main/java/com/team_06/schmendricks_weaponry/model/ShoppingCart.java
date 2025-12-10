@@ -1,5 +1,7 @@
 package com.team_06.schmendricks_weaponry.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -14,9 +16,13 @@ public class ShoppingCart {
     // List of items in the cart
     private List<Item> items = new ArrayList<>();
 
-    int cartId;
+    private int cartId;
 
     // Get all items currently in the cart.
+
+    public ShoppingCart() {
+        items = new ArrayList<>();
+    }
 
     public ShoppingCart(List<Item> i, int id){
         items = i;
@@ -26,6 +32,8 @@ public class ShoppingCart {
     public List<Item> getItems() {
         return items;
     }
+
+    public int getCartId(){ return cartId; }
 
     //Add an item to the cart.
     public void addItem(Item item) {
@@ -43,7 +51,7 @@ public class ShoppingCart {
     }
 
     // Get the total number of items in the cart.
-
+    @JsonIgnore
     public int getTotalQuantity() {
         return items.size();
     }
@@ -52,6 +60,7 @@ public class ShoppingCart {
      * Calculate the total price of all items in the cart.
      * @return total price as BigDecimal
      */
+    @JsonIgnore
     public BigDecimal getTotalPrice() {
         return items.stream()
                 .map(Item::getPrice)
@@ -62,6 +71,14 @@ public class ShoppingCart {
 
     public void clear() {
         items.clear();
+    }
+
+    public void setCartId(int id){
+        cartId = id;
+    }
+
+    public void setItems(List<Item> items){
+        items = items;
     }
 }
 

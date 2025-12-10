@@ -6,6 +6,7 @@ import com.team_06.schmendricks_weaponry.model.CartSummary;
 import java.math.BigDecimal;
 import java.util.List;
 
+import com.team_06.schmendricks_weaponry.model.Item;
 import com.team_06.schmendricks_weaponry.model.ShoppingCart;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,9 @@ public class CheckOutController {
 
     @GetMapping("/checkout")
     public String showCheckout(Model model) {
-        List<CartItem> items = List.of(
-                new CartItem("Knife", "Short, cheap blade. Good as a sidearm.", 10.00),
-                new CartItem("Shortsword", "A lightweight, versatile sword", 40.00)
+        /*List<Item> items = List.of(
+                new Item("Knife", "Short, cheap blade. Good as a sidearm.", 10.00),
+                new Item("Shortsword", "A lightweight, versatile sword", 40.00)
         );
 
 
@@ -30,7 +31,7 @@ public class CheckOutController {
         );
 
 
-        model.addAttribute("cart", cart);
+        model.addAttribute("cart", cart);*/
         return "checkout";
     }
 
@@ -43,10 +44,10 @@ public class CheckOutController {
         );
 
 
-        CartSummary cart = new CartSummary(items, 15.00);
+        //CartSummary cart = new CartSummary(items, 15.00);
 
 
-        model.addAttribute("cart", cart);
+        //model.addAttribute("cart", cart);
 
 
         return "payment"; // this should match your payment.html page name
@@ -61,10 +62,10 @@ public class CheckOutController {
         );
 
 
-        CartSummary cart = new CartSummary(items, 15.00);
+        //CartSummary cart = new CartSummary(items, 15.00);
 
 
-        model.addAttribute("cart", cart);
+        //model.addAttribute("cart", cart);
         model.addAttribute("orderNumber", "SW-000123");
         model.addAttribute("customerEmail", "hero@example.com");
         model.addAttribute("estimatedDelivery", "Wednesday, Oct 23 – Friday, Oct 25");

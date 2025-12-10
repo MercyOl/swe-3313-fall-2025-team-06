@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.core.type.TypeReference;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.context.annotation.SessionScope;
 
 import java.io.File;
 import java.io.IOException;
@@ -12,9 +13,13 @@ import java.util.Optional;
 
 
 @Service
+@SessionScope
 public class UserService {
+
     private ObjectMapper mapper = new ObjectMapper();
     private File userDataFile = new File("src/main/resources/data/UserData.json");
+
+    private User currentUser = new User();
 
     public ArrayList<User> loadUsers(){
         try {
@@ -39,5 +44,13 @@ public class UserService {
 
         userList.add(newUser);
         saveUsers(userList);
+    }
+
+    public void setCurrentUser(User u){
+        currentUser = u;
+    }
+
+    public User getCurrentUser(){
+        return currentUser;
     }
 }
