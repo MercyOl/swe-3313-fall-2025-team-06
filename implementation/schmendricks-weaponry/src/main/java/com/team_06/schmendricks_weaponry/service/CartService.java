@@ -1,9 +1,13 @@
 package com.team_06.schmendricks_weaponry.service;
 
 import com.team_06.schmendricks_weaponry.model.Item;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.team_06.schmendricks_weaponry.model.ShoppingCart;
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.SessionScope;
 
+import java.io.File;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,7 +20,42 @@ import java.util.List;
 @SessionScope
 public class CartService {
 
-    private final List<Item> cartItems = new ArrayList<>(); // List of items in the cart
+    private List<ShoppingCart> carts = new ArrayList<ShoppingCart>();
+    private List<Item> cartItems = new ArrayList<>(); // List of items in the cart
+
+    ObjectMapper mapper = new ObjectMapper();
+    File cartStorage = new File("src/main/resources/ShoppingCarts.json");
+
+    public List<ShoppingCart> loadCarts(){
+        try{
+
+            carts = mapper.readValue(cartStorage, new TypeReference<List<ShoppingCart>>() { } );
+            return carts;
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return new ArrayList<ShoppingCart>();
+        }
+    }
+
+    public void saveCarts(List<ShoppingCart> carts){
+
+        try {
+
+            mapper.writerWithDefaultPrettyPrinter().writeValue(cartStorage, carts);
+
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void createCart(ShoppingCart cart){
+        try{
+            ShoppingCart newCart = new ShoppingCart(new ArrayList<Item>(), loadCarts().size());
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
 
     // Returns the list of items currently in the cart.
     public List<Item> getCartItems() {

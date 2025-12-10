@@ -12,9 +12,16 @@ import java.util.List;
 public class ShoppingCart {
 
     // List of items in the cart
-    private final List<Item> items = new ArrayList<>();
+    private List<Item> items = new ArrayList<>();
+
+    int cartId;
 
     // Get all items currently in the cart.
+
+    public ShoppingCart(List<Item> i, int id){
+        items = i;
+        cartId = id;
+    }
 
     public List<Item> getItems() {
         return items;

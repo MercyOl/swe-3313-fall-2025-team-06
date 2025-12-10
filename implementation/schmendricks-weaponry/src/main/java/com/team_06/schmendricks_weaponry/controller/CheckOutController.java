@@ -2,7 +2,11 @@ package com.team_06.schmendricks_weaponry.controller;
 
 import com.team_06.schmendricks_weaponry.model.CartItem;
 import com.team_06.schmendricks_weaponry.model.CartSummary;
+
+import java.math.BigDecimal;
 import java.util.List;
+
+import com.team_06.schmendricks_weaponry.model.ShoppingCart;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -21,8 +25,8 @@ public class CheckOutController {
 
 
         CartSummary cart = new CartSummary(
-                items,
-                15.00
+                new ShoppingCart(items),
+                new BigDecimal(15.00)
         );
 
 
