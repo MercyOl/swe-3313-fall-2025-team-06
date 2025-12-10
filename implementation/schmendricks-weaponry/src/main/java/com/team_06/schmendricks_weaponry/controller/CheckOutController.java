@@ -1,4 +1,4 @@
-package com.team_06.schmendricks_weaponry;
+package com.team_06.schmendricks_weaponry.controller;
 
 import com.team_06.schmendricks_weaponry.model.CartItem;
 import com.team_06.schmendricks_weaponry.model.CartSummary;
